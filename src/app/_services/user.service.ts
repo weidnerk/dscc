@@ -10,7 +10,6 @@ import { environment } from '../../environments/environment';
 import { ResetPasswordViewModel } from '../_models/ResetPasswordViewModel';
 import { ForgotPasswordViewModel } from '../_models/ResetPasswordViewModel';
 import { ChangePasswordBindingModel } from '../_models/ResetPasswordViewModel';
-// import { UserProfileVM } from '../_models/userprofile';
 import { UserProfile, TokenStatusTypeCustom, UserSettings, AppIDSelect, UserStoreView, UserSettingsView, UserProfileKeys, UserProfileView, UserProfileKeysView, eBayUser, UserToken } from '../_models/userprofile';
 import { eBayStore } from '../_models/orderhistory';
 
@@ -144,7 +143,6 @@ export class UserService {
     }
 
     UserSettingsViewGet(): Observable<UserSettingsView> {
-
         const userJson = localStorage.getItem('currentUser');
         if (userJson) {
             let currentUser = JSON.parse(userJson);

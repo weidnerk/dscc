@@ -86,7 +86,8 @@ export class ListingdbComponent implements OnInit {
     private _orderHistoryService: OrderHistoryService,
     private fb: FormBuilder,
     private _parmService: ParamService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private _listCheckService: ListCheckService) { }
 
   // private sub: any;
   listingID: number;  // Listing.ID
@@ -123,10 +124,10 @@ export class ListingdbComponent implements OnInit {
   htmlContent = '';
 
   // status spinner variables
-  color:ThemePalette = 'primary';
-  mode:"determinate" | "indeterminate" | undefined = 'indeterminate';
-  value:number = 50;
-  displayProgressSpinner:boolean = false;
+  color: ThemePalette = 'primary';
+  mode: "determinate" | "indeterminate" | undefined = 'indeterminate';
+  value: number = 50;
+  displayProgressSpinner: boolean = false;
   eBayBusinessPolicies: eBayBusinessPolicies;
 
   // form variables
@@ -354,7 +355,7 @@ export class ListingdbComponent implements OnInit {
       else {
         if (this.storeButtonVal == true) {
           this.storeButtonVal = false;
-          this.validationMessage = this.isValid();
+          this.validationMessage = this.isFormValid();
           if (!this.validationMessage) {
             this.saveListing();
           }
@@ -365,7 +366,7 @@ export class ListingdbComponent implements OnInit {
         }
         if (this.listButtonVal == true) {
           this.listButtonVal = false;
-          this.validationMessage = this.isValid();
+          this.validationMessage = this.isFormValid();
           if (!this.validationMessage && this.listing) {
             this.onCreateListing();
           }
@@ -517,7 +518,7 @@ export class ListingdbComponent implements OnInit {
   /**
    * Must pass all validation checks.
    */
-  isValid(): string | null {
+  isFormValid(): string | null {
     if (this.listing) {
       if (this.listing.SupplierItem.SupplierPrice === 0) {
         return 'Validation: Supplier price cannot be 0';
@@ -842,21 +843,26 @@ export class ListingdbComponent implements OnInit {
     return false;
   }
   onEndListing() {
-    const dialogRef = this.dialog.open(EndlistingComponent,
-      {
-        disableClose: true,
-        height: '300px',
-        width: '900px'
-      });
+    try {
+      const dialogRef = this.dialog.open(EndlistingComponent,
+        {
+          disableClose: true,
+          height: '300px',
+          width: '900px'
+        });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.endListing(result);
-      }
-      if (!result) {
-        console.log('No');
-      }
-    });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.endListing(result);
+        }
+        if (!result) {
+          console.log('No');
+        }
+      });
+    }
+    catch (error) {
+      this.showMessage(error);
+    }
   }
 
   endListing(reason: string) {

@@ -84,37 +84,28 @@ fdescribe('Listing Component tests', () => {
   });
 
   it('is listing component defined', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeDefined();
   })
+  it('is form valid when empty', () => {
 
-  it('should get profile data of user', () => {
+    let listingTitle = component.listingForm.controls['listingTitle'];
+    listingTitle.setValue('some listing title');
+    
+    let listingPrice = component.listingForm.controls['listingPrice'];
+    listingPrice.setValue(100.00);
 
-    let token = {
-      "access_token": "8RqdKxeNrJM92q6s-eJvhvnoKCYW82FjZB9bl0GIk3FmbDNz5AdDSAc-lx1NNewoKSlhQEUh-jvD3o98YkFU31dtqvih_RLqiBH9rf73glKrOcLkeaqDrFSmIUwGCefXFiYskYFkts3KAHUvG7nHCa8dN1tyaiARyquQpZuMJgs6jQydoXjuV0ZeDLHteSM0NS6OUcpzlElBN48chohf1XMuM9up4Nh80xtduJMjj64tN7fHXx5uTYLoxhzXS7ezbhV7cRh1fnunefm8lcj_hEMBiRDl6H_wdO_WBNmSd51hFHwahPqdcAfA8TeBZvmairN3AnaQNwWpwMSe4zm4y--IXtOhXHZTaptufhi2KxqCPN8eUS-w2OHShkwQRBklfz2bpW69l_JG6K2PriMeQklmxu83yZagfzftQpQpc7u-VHlSIEHWhwrUpYZzqCSFs2TO6JpkUQLngyxC5QoDpWaD7Zf0qS6geD7d4aIk0tPj0x-jqSD4kzxO3GckkX76",
-      "token_type": "bearer",
-      "expires_in": 1209599,
-      "userName": "ventures2018@gmail.com",
-      ".issued": "Fri, 10 Jul 2020 16:37:58 GMT",
-      ".expires": "Fri, 24 Jul 2020 16:37:58 GMT"
-    }
-    localStorage.setItem('currentUser', JSON.stringify(token));
+    let listingQty = component.listingForm.controls['listingQty'];
+    listingQty.setValue(1);
 
-    let url = "http://localhost:51721/api/Account/userprofileget?userName=ventures2018@gmail.com";
+    let sourceURL = component.listingForm.controls['sourceURL'];
+    sourceURL.setValue('some source URL');
 
-    const profileInfo = { userID: 'blacksonic' };
-    const http = TestBed.get(HttpTestingController);
-    let httpResponse;
+    let description = component.listingForm.controls['description'];
+    description.setValue('description');
 
-    service.UserProfileGet().subscribe((response) => {
-      httpResponse = response;
-      console.log(response);
-      // http.expectOne(url).flush(profileInfo);
-      // expect(httpResponse).toEqual(profileInfo);
-    },
-      error => {
-        console.log('found error');
+    let sellerItemID = component.listingForm.controls['sellerItemID'];
+    sellerItemID.setValue('itemID');
 
-      });
-    expect(service).toBeTruthy();
-  });
+    expect(component.listingForm.valid).toBeTruthy();
+  })
 });

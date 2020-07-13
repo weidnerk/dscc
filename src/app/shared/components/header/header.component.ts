@@ -26,23 +26,7 @@ export class HeaderComponent implements OnInit {
   }
   onLogout() {
 
-    /*
-    this.userSettingsView = null;
-
-    // clear settings
-    let settings = new FilterSettings();
-    settings.seller = null;
-    settings.minSold = 1;
-    settings.daysBack = 30;
-    settings.minPrice = null;
-    settings.maxPrice = null;
-    settings.showFilter = true;
-    settings.rptNumber = 0;
-    settings.lastScan = null;
-    this.params.changeFilterSettings(settings);
-*/
     localStorage.removeItem('currentUser');
-    // this.route.navigate(['/login'], {relativeTo: this.activatedRoute});
     this.route.navigate(['/login'], {relativeTo: this.activatedRoute});
   }
 }

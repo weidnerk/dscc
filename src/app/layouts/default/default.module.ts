@@ -49,6 +49,7 @@ import { ConfirmComponent } from 'src/app/confirm/confirm.component';
 import { EndlistingComponent } from 'src/app/endlisting/endlisting.component';
 import { ErrordisplayComponent } from 'src/app/errordisplay/errordisplay.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ListCheckService } from 'src/app/_services/listingcheck.service';
 
 @NgModule({
   declarations: [ 
@@ -106,7 +107,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDialogModule
   ],
   providers: [
-    DashboardService
+    DashboardService, ListCheckService
   ]
 })
 export class DefaultModule { }

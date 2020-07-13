@@ -1,0 +1,46 @@
+<div *ngIf="errMessage">{{errMessage}}</div>
+<mat-nav-list>
+<div class="profile-card">
+    <div class="header">
+        <h2 *ngIf="profile">{{profile.firstname}}</h2>
+        <h4 *ngIf="profile">{{profile.username}}</h4>
+        <span *ngIf="loading">
+            <img
+                src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
+        </span>
+    </div>
+    <img class="size" src="assets/unnamed.png">
+</div>
+
+    <mat-divider></mat-divider>
+
+    <h2 matSubheader>Pages</h2>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/">Dashboard</a>
+    <a [disabled]="profile && !profile.selectedStore" mat-list-item routerLinkActive="list-item-active" routerLink="/gamma/1">Listed</a>
+    <a [disabled]="profile && !profile.selectedStore" mat-list-item routerLinkActive="list-item-active" routerLink="/gamma/2">Unlisted</a>
+    <a [disabled]="profile && !profile.selectedStore" mat-list-item routerLinkActive="list-item-active" routerLink="/listingdetaildb/0">Add Listing</a>
+    <!-- <a mat-list-item routerLinkActive="list-item-active" routerLink="/research">Research</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/scanhistory">Scan History</a> -->
+
+    <mat-divider></mat-divider>
+
+    <h2 matSubheader>Tools</h2>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/usersettings">
+        <mat-icon>settings</mat-icon>
+        User Settings
+    </a>
+    <a [disabled]="profile && profile.isVA" mat-list-item routerLinkActive="list-item-active" routerLink="/">
+        <mat-icon>security</mat-icon>
+        Admin
+    </a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/apikeys">
+        <mat-icon>vpn_key</mat-icon>
+        API Keys
+    </a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/changepassword">
+        <mat-icon>lock_open_outline</mat-icon>
+        Change password
+    </a>
+</mat-nav-list>

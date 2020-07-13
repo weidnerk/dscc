@@ -1,0 +1,157 @@
+<div *ngIf="errorMessage" class="error">{{errorMessage}}</div>
+<ng-container>
+    <mat-form-field>
+        <mat-label>Accounts</mat-label>
+        <mat-select [(ngModel)]="selectedStore" (selectionChange)="onStoreSelected($event)">
+            <mat-option *ngFor="let m of userStores" [value]="m.storeID">
+                {{ m.eBayUserID }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field><br /><br />
+    <mat-card>
+        <!-- <div class="container-fluid"> -->
+        <div class="row">
+            <div class="col-3">
+                Repricer last ran:
+            </div>
+            <div class="col-3">
+                {{dashboard.repricerLastRan | date: 'MM/dd/yyyy hh:mm a'}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                Repricer elapsed time:
+            </div>
+            <div class="col-3">
+                {{dashboard.repricerElapsedTime | number:'1.2-2'}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                Listed in store:
+            </div>
+            <div class="col-3">
+                {{dashboard.listed}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                Out-of-stock:
+            </div>
+            <div class="col-3">
+                {{dashboard.oos}}
+                <!-- <span *ngIf="loading">
+                    <img
+                        src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
+                </span> -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                Not listed:
+            </div>
+            <div class="col-3">
+                {{dashboard.notListed}}
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-3">
+                SCAN STORE
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                db is missing items:
+            </div>
+            <div *ngIf="storeAnalysis" class="col-3">
+                {{storeAnalysis.dbIsMissingItems.length}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                Qty mismatch:
+            </div>
+            <div *ngIf="storeAnalysis" class="col-3">
+                {{storeAnalysis.qtyMismatch.length}}
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-3">
+                Unfulfilled:
+            </div>
+            <div class="col-3">
+                {{unfulfilledOrders}}
+            </div>
+        </div>
+        <!-- not sure need to display last error -->
+        <!-- <div class="row">
+            <div class="col-3">
+                Errors:
+            </div>
+            <div class="col-3 error">
+                {{logStatus}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                Last error:
+            </div>
+            <div class="col-5 error">
+                {{lastErr}}
+            </div>
+        </div> -->
+        <br />
+        <button [disabled]="!isConfigured || (userProfile && userProfile.isVA)" (click)="onStoreScan()" class="btn"
+            mat-button mat-raised-button color="primary" type="button">Store
+            Scan</button>&nbsp;
+        <ng-container *ngIf="admin">
+            <button [disabled]="!isConfigured || (userProfile && userProfile.isVA)" class="btn" mat-button (click)="onCompareOrders()"
+                mat-raised-button color="primary" type="button" matTooltip="API vs SalesOrder">Compare orders</button>
+        </ng-container>
+    </mat-card>
+</ng-container>
+<br />
+<mat-card>
+    <h2>NOTES</h2>
+    <ul>
+        <li>Currently just support Walmart as a supplier.</li>
+        <li>Can source from a Walmart variation but cannot yet create a variation listing.</li>
+        <li>TIP: You can only opt-in to Seller Hub after you've made your first sale.</li>
+        <li>You can create a new eBay account as a buyer in seconds, but more personal info will be required to sell.
+        </li>
+        <li>The eBay Business Poliices page is not available by default on new accounts - you must opt-in</li>
+        <li>Non-multi-jurisdiction CA, CT, DC, MD, MS, MA, TN</li>
+        <li><a target="_blank" href="https://blog.dsmtool.com/how-to-start-dropshipping-business/ebay-dropshipping-non-api-software/">eBay Dropshipping with Non-API Software Myth Busted</a></li>
+    </ul>
+</mat-card>
+<br />
+<mat-card>
+    <ul>
+        <li>Check return cases</li>
+        <li>Check Walmart emails</li>
+        <li>Check Buyer messages</li>
+        <li>Check eBay messages</li>
+        <li>Any new orders?</li>
+    </ul>
+</mat-card>
+<br />
+<mat-card>
+    <ul>
+        <li>Get supplier alerts</li>
+        <li>Get Tax exempt</li>
+        <li>Create a stealth account</li>
+        <li>Season a new account</li>
+        <li>Scan seler</li>
+        <li>Provide eBay dev account</li>
+        <li>Auto order</li>
+        <li>Course</li>
+        <li>Create LLC</li>
+        <li>Remit quarterly sales tax</li>
+
+    </ul>
+</mat-card>
+<app-progress-spinner class="example-margin" [color]='color' [mode]="mode" [value]="value" [backdropEnabled]="true"
+    [positionGloballyCenter]="true" [displayProgressSpinner]="displayProgressSpinner">
+</app-progress-spinner>

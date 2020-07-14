@@ -356,7 +356,7 @@ export class OrderHistoryService {
                 }
             )
     }
-    getListingBySupplierURL(storeID: number, URL: string): Observable<SupplierItem> {
+    getListingBySupplierURL(storeID: number, URL: string): Observable<Listing> {
         const userJson = localStorage.getItem('currentUser');
         if (userJson) {
             let currentUser = JSON.parse(userJson);
@@ -369,7 +369,7 @@ export class OrderHistoryService {
                     'Authorization': 'Bearer ' + currentUser.access_token
                 })
             };
-            return this.http.get<SupplierItem>(url, httpOptions).pipe(
+            return this.http.get<Listing>(url, httpOptions).pipe(
                 catchError(this.handleError)
             );
         }

@@ -969,13 +969,16 @@ export class ListingdbComponent implements OnInit {
 
     if (!this.listing) {
       this._orderHistoryService.getListingBySupplierURL(this.userProfile.selectedStore, this.ctlSourceURL.value)
-        .subscribe(si => {
-          if (!si) {
+        .subscribe(listing => {
+          if (!listing) {
             this.getWMItem();
           }
           else {
             this.displayProgressSpinner = false;
-            this.displayError('Supplier Item already exists for this store.');
+            let output: string = "<span class='error'>ERROR:</span><br/>Supplier Item already exists for this store.";
+            output += '<br/><br/><b>Listing title:</b> ';
+            output += listing.ListingTitle;
+            this.displayError(output);
           }
         });
     }

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, fakeAsync, tick, inject } from '@angular/core/testing';
+import { Listing, SupplierItem} from '../../_models/orderhistory';
 import { ListingdbComponent } from './listing.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -88,9 +89,6 @@ fdescribe('Listing Component tests', () => {
   })
   it('is form valid when empty', () => {
 
-    let listingTitle = component.listingForm.controls['listingTitle'];
-    listingTitle.setValue('some listing title');
-    
     let listingPrice = component.listingForm.controls['listingPrice'];
     listingPrice.setValue(100.00);
 
@@ -101,11 +99,86 @@ fdescribe('Listing Component tests', () => {
     sourceURL.setValue('some source URL');
 
     let description = component.listingForm.controls['description'];
-    description.setValue('description');
+    description.setValue('item description');
 
     let sellerItemID = component.listingForm.controls['sellerItemID'];
     sellerItemID.setValue('itemID');
 
     expect(component.listingForm.valid).toBeTruthy();
+  })
+  it('isFormValid', () => {
+    component.listing = new Listing();
+    component.listing.PictureURL = "www.pictureurl.com";
+
+    let listingTitle = component.listingForm.controls['listingTitle'];
+    listingTitle.setValue('some listing title');
+
+    let description = component.listingForm.controls['description'];
+    description.setValue('item description');
+
+    let supplierItem = new SupplierItem();
+    supplierItem.SupplierPrice = 100;
+    component.listing.SupplierItem = supplierItem;
+
+    expect(component.isFormValid()).toBeNull();
+  })
+  it('isFormValid - 0 supplier price', () => {
+    component.listing = new Listing();
+    component.listing.PictureURL = "www.pictureurl.com";
+
+    let listingTitle = component.listingForm.controls['listingTitle'];
+    listingTitle.setValue('some listing title');
+
+    let description = component.listingForm.controls['description'];
+    description.setValue('item description');
+
+    let supplierItem = new SupplierItem();
+    supplierItem.SupplierPrice = 0;
+    component.listing.SupplierItem = supplierItem;
+
+    expect(component.isFormValid()).not.toBeNull();
+  })
+  it('isFormValid - listing price cannot be less than 0', () => {
+    component.listing = new Listing();
+    component.listing.PictureURL = "www.pictureurl.com";
+
+    let listingTitle = component.listingForm.controls['listingTitle'];
+    listingTitle.setValue('some listing title');
+
+    let listingPrice = component.listingForm.controls['listingPrice'];
+    listingTitle.setValue(-1);
+
+    let description = component.listingForm.controls['description'];
+    description.setValue('item description');
+
+    let supplierItem = new SupplierItem();
+    supplierItem.SupplierPrice = 0;
+    component.listing.SupplierItem = supplierItem;
+
+    expect(component.isFormValid()).not.toBeNull();
+  })
+  it('isTitleValid with comma', () => {
+    component.listing = new Listing();
+
+    let listingTitle = component.listingForm.controls['listingTitle'];
+    listingTitle.setValue('some, listing title');
+
+    expect(component.isTitleValid()).not.toBeNull();
+  })
+  it('isTitleValid contains SHIPPING', () => {
+    component.listing = new Listing();
+
+    let listingTitle = component.listingForm.controls['listingTitle'];
+    listingTitle.setValue('SHIPPING listing title');
+
+    expect(component.isTitleValid()).not.toBeNull();
+  })
+  it('isTitleValid contains MULTIPLE', () => {
+    component.listing = new Listing();
+
+    let listingTitle = component.listingForm.controls['listingTitle'];
+    listingTitle.setValue('MULTIPLE listing title');
+
+    expect(component.isTitleValid()).not.toBeNull();
   })
 });

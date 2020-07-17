@@ -89,7 +89,6 @@ export class ListingdbComponent implements OnInit {
     public dialog: MatDialog,
     private _listCheckService: ListCheckService) { }
 
-  // private sub: any;
   listingID: number;  // Listing.ID
   listing: Listing | null;
   walItem: SupplierItem | null = null;
@@ -526,10 +525,6 @@ export class ListingdbComponent implements OnInit {
       if (this.listing.ListingPrice < 1) {
         return 'Validation: price cannot be < 1.00';
       }
-      // 04.20.2020 now user is asked to override warnings when listing.
-      // if (this.ctlCheckDescription.value !== true) {
-      //   return 'Validation: description';
-      // }
       if (!this.ctlListingTitle.value) {
         return 'Validation: listing title';
       }
@@ -540,9 +535,6 @@ export class ListingdbComponent implements OnInit {
       if (!this.ctlDescription.value) {
         return 'Validation: description';
       }
-      // if (!this.ctlListingQty.value) {
-      //   return 'Validation: listing qty';
-      // }
       if (!this.listing.PictureURL) {
         return 'Validation: could not fetch supplier pictures';
       }

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ErrordisplayComponent } from './errordisplay.component';
 
-describe('ErrordisplayComponent', () => {
+xdescribe('ErrordisplayComponent', () => {
   let component: ErrordisplayComponent;
   let fixture: ComponentFixture<ErrordisplayComponent>;
 

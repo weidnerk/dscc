@@ -147,10 +147,8 @@ export class ListingdbComponent implements OnInit {
   get ctlCheckDescription() { return this.listingForm.controls['checkDescription']; }
 
   get ctlDescription() { return this.listingForm.controls['description']; }
-  // get ctlHtmlContent() { return this.listingForm.controls['htmlContent']; }
 
 
-  // get ctlEbayOrderNum() { return this.orderForm.controls['ebayOrderNumber']; }
   get ctlFromDate() { return this.orderForm.controls['fromDate']; }
   get ctlToDate() { return this.orderForm.controls['toDate']; }
   get ctlIPaid() { return this.orderForm.controls['ipaid']; }

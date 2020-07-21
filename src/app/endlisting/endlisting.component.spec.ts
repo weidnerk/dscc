@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EndlistingComponent } from './endlisting.component';
 
-describe('EndlistingComponent', () => {
+xdescribe('EndlistingComponent', () => {
   let component: EndlistingComponent;
   let fixture: ComponentFixture<EndlistingComponent>;
 

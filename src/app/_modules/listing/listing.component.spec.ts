@@ -33,8 +33,7 @@ import { UserSettingsView } from 'src/app/_models/userprofile';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 
-fdescribe('Listing Component tests', () => {
-  userSettingsView: UserSettingsView;
+describe('Listing Component tests', () => {
   let service: UserService;
   let component: ListingdbComponent;
   let fixture: ComponentFixture<ListingdbComponent>;

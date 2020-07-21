@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ScanhistoryComponent } from './scanhistory.component';
 
-describe('ScanhistoryComponent', () => {
+xdescribe('ScanhistoryComponent', () => {
   let component: ScanhistoryComponent;
   let fixture: ComponentFixture<ScanhistoryComponent>;
 

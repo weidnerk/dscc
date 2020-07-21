@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GammaComponent } from './gamma.component';
 
-describe('GammaComponent', () => {
+xdescribe('GammaComponent', () => {
   let component: GammaComponent;
   let fixture: ComponentFixture<GammaComponent>;
 

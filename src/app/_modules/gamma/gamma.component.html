@@ -27,81 +27,82 @@
   <div class="error">
     <span [innerHTML]="errorMessage"></span>
   </div>
-  <div class="table-container">
-    <mat-table #table [dataSource]="dataSource" matSort>
-
-      <ng-container matColumnDef="Source">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Source</mat-header-cell>
-        <mat-cell *matCellDef="let row">
-          <a target="_blank" href="{{row.SourceURL}}">
-            <mat-icon svgIcon="wmicon"></mat-icon>
-          </a>
-        </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="Store">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Store</mat-header-cell>
-        <mat-cell *matCellDef="let row">
-          <a *ngIf="row.ListedItemID" target="_blank" href="https://www.ebay.com/itm/{{row.ListedItemID}}">
-            <mat-icon>info_outline</mat-icon>
-          </a>
-          <span *ngIf="!row.ListedItemID">
-            <mat-icon>info_outline</mat-icon>
-          </span>
-        </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="Seller">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Seller</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.Seller}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="Title">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.Title}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="PictureURL">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Pic</mat-header-cell>
-        <mat-cell *matCellDef="let row">
-          <span *ngIf="row.PictureURL">
-            <a [routerLink]="['/listingdetaildb',row.ID]"><img [src]="getFirstImg(row.PictureURL)" height="150px"
-                width="150px"></a>
-          </span></mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="ListingPrice">
-        <mat-header-cell class="cellright" *matHeaderCellDef mat-sort-header>Listing Price</mat-header-cell>
-        <mat-cell class="cellright" *matCellDef="let row">{{row.ListingPrice | currency}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="Qty">
-        <mat-header-cell class="cellright" *matHeaderCellDef mat-sort-header>Qty</mat-header-cell>
-        <mat-cell class="cellright" *matCellDef="let row">{{row.Qty}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="CreatedByName">
-        <mat-header-cell class="cellright" *matHeaderCellDef mat-sort-header>Created By</mat-header-cell>
-        <mat-cell class="cellright" *matCellDef="let row">{{row.CreatedByName}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="UpdatedByName">
-        <mat-header-cell class="cellright" *matHeaderCellDef mat-sort-header>Updated By</mat-header-cell>
-        <mat-cell class="cellright" *matCellDef="let row">{{row.UpdatedByName}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="ListedByName">
-        <mat-header-cell class="cellright" *matHeaderCellDef mat-sort-header>Listed By</mat-header-cell>
-        <mat-cell class="cellright" *matCellDef="let row">{{row.ListedByName}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="Listed">
-        <mat-header-cell class="cellright" class="cellright" *matHeaderCellDef mat-sort-header>Listed</mat-header-cell>
-        <mat-cell class="cellright" *matCellDef="let row">{{row.Listed | date:'MM/dd/yyyy'}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="QtySold">
-        <mat-header-cell class="cellright" *matHeaderCellDef mat-sort-header>Qty Sold</mat-header-cell>
-        <mat-cell class="cellright" *matCellDef="let row">{{row.QtySold}}</mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;">
-      </mat-row>
-
-    </mat-table>
-  </div>
- 
 </div>
+<div>
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="PictureURL">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Pic</mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Picture">
+        <span *ngIf="row.PictureURL">
+          <a [routerLink]="['/listingdetaildb',row.ID]"><img [src]="getFirstImg(row.PictureURL)" height="150px"
+              width="150px"></a>
+        </span></mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Title">{{row.Title}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Source">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Source</mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Source">
+        <a target="_blank" href="{{row.SourceURL}}">
+          <mat-icon svgIcon="wmicon"></mat-icon>
+        </a>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Store">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Store</mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="ItemID">
+        <a *ngIf="row.ListedItemID" target="_blank" href="https://www.ebay.com/itm/{{row.ListedItemID}}">
+          <mat-icon>info_outline</mat-icon>
+        </a>
+        <span *ngIf="!row.ListedItemID">
+          <mat-icon>info_outline</mat-icon>
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Seller">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Seller</mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Seller">{{row.Seller}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ListingPrice">
+      <mat-header-cell class="cellright" *matHeaderCellDef mat-sort-header>Listing Price</mat-header-cell>
+      <mat-cell class="cellright" *matCellDef="let row" data-label="Price">{{row.ListingPrice | currency}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Qty">
+      <mat-header-cell class="cellright" *matHeaderCellDef mat-sort-header>Qty</mat-header-cell>
+      <mat-cell class="cellright" *matCellDef="let row" data-label="Qty">{{row.Qty}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="CreatedByName">
+      <mat-header-cell class="cellright" *matHeaderCellDef mat-sort-header>Created By</mat-header-cell>
+      <mat-cell class="cellright" *matCellDef="let row" data-label="Created">{{row.CreatedByName}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="UpdatedByName">
+      <mat-header-cell class="cellright" *matHeaderCellDef mat-sort-header>Updated By</mat-header-cell>
+      <mat-cell class="cellright" *matCellDef="let row" data-label="Updated">{{row.UpdatedByName}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ListedByName">
+      <mat-header-cell class="cellright" *matHeaderCellDef mat-sort-header>Listed By</mat-header-cell>
+      <mat-cell class="cellright" *matCellDef="let row" data-label="Listed by">{{row.ListedByName}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Listed">
+      <mat-header-cell class="cellright" class="cellright" *matHeaderCellDef mat-sort-header>Listed</mat-header-cell>
+      <mat-cell class="cellright" *matCellDef="let row" data-label="Listed">{{row.Listed | date:'MM/dd/yyyy'}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="QtySold">
+      <mat-header-cell class="cellright" *matHeaderCellDef mat-sort-header>Qty Sold</mat-header-cell>
+      <mat-cell class="cellright" *matCellDef="let row" data-label="Qty sold">{{row.QtySold}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+
+  </mat-table>
+</div>
+
+
 <mat-paginator [pageSize]="100" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 <app-progress-spinner [color]="color" [mode]="mode" [value]="value" [backdropEnabled]="true"
   [positionGloballyCenter]="true" [displayProgressSpinner]="displayProgressSpinner">

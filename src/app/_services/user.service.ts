@@ -12,6 +12,7 @@ import { ForgotPasswordViewModel } from '../_models/ResetPasswordViewModel';
 import { ChangePasswordBindingModel } from '../_models/ResetPasswordViewModel';
 import { UserProfile, TokenStatusTypeCustom, UserSettings, AppIDSelect, UserStoreView, UserSettingsView, UserProfileKeys, UserProfileView, UserProfileKeysView, eBayUser, UserToken } from '../_models/userprofile';
 import { eBayStore } from '../_models/orderhistory';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService {
@@ -31,7 +32,8 @@ export class UserService {
     private getUserProfileKeysUrl: string = environment.API_ENDPOINT + 'getuserprofilekeys';
     private geteBayUserUrl: string = environment.API_ENDPOINT + 'getebayuser';
 
-    constructor(private http: HttpClient) { }
+    constructor(private router: Router,
+        private http: HttpClient) { }
 
     SendMsg() {
         let url = environment.API_ENDPOINT + "api/Account/sendmsg";
@@ -459,6 +461,10 @@ export class UserService {
         // console.log('got to err handler');
         let errMsg: string = "";
         let errDetail: string | null = null;
+        if (error.status === 401) {
+            localStorage.removeItem('currentUser');
+            this.router.navigate(['/login']);
+        }
         if (error.error) {
             if (error.error instanceof ErrorEvent) {
                 // A client-side or network error occurred. Handle it accordingly.

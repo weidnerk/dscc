@@ -2,7 +2,7 @@
 <br/>
 <br/>
 <br/>
-<div class="container rounded" style="text-align:center;width:50%">
+<div class="container rounded">
     <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
         <h2>ds-CruiseControl</h2><br/>
         <h3>Logon</h3>
@@ -14,7 +14,6 @@
                         <input matInput class="matinput" name="username" [(ngModel)]="model.Username"
                             #username="ngModel" />
                     </mat-form-field>
-                    <!-- <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div> -->
                 </div>
                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
                     <mat-form-field appearance="outline" class="outlinepadding">

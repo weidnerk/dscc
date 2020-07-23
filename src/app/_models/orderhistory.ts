@@ -56,8 +56,6 @@ export class OrderHistory {
     ImageUrl: string;
     ListingEnded: boolean;
     ItemId: string;
-    // WMCount: number;
-    // WMUrl: string;
     ToListing: boolean;
 }
 export class UpdateToListing {
@@ -70,7 +68,6 @@ export class UpdateToListing {
 // Used for initial scan
 export class ModelView {
     Listings: Listing[]
-    // MatchedListings: number;
     TotalOrders: number;
     ElapsedSeconds: number;
     PercentTotalItemsProcesssed: number;
@@ -170,7 +167,6 @@ export class SearchReport {
     SourceItemNo: string;
     SourceUrl: string;
     EbayUrl: string;
-    //DateOfPurchase: Date;
     EbayImgCount: number;
     SourceTitle: string;
     EbayTitle: string;
@@ -370,12 +366,3 @@ export interface eBayStore {
     storeName: string;
     subscription: string;
 }
-// export interface GetOrdersResponse {
-//     buyerHandle: string;
-//     buyer: string;
-//     datePurchased: Date;
-//     buyerPaid: number;
-//     buyerState: string;
-//     itemID: string;
-
-// }

@@ -65,18 +65,20 @@ const routes: Routes = [
             component: TimesSoldComponent, 
             canActivate: [AuthGuard] 
         },
-        { path: 'forgotpassword', 
-            component: ForgotpasswordComponent
-        },
         { path: 'changepassword', 
             component: ChangepasswordComponent
         }
     ]
     },
-    { path: 'login', component: LoginComponent },
+    { 
+        path: 'login', component: LoginComponent 
+    },
     {
         path: 'register',
         component: RegisterComponent
+    },
+    { path: 'forgotpassword', 
+        component: ForgotpasswordComponent
     }
 ];
 

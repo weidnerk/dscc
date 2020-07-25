@@ -6,7 +6,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { OrderHistoryService } from '../../_services/orderhistory.service';
-import { Listing, DeriveProfit, TimesSold, ListingNoteView, SellerListing, SupplierItem, SalesOrder, PriceProfit, ListingLogView, eBayBusinessPolicies, ListingLog } from '../../_models/orderhistory';
+import { Listing, DeriveProfit, TimesSold, ListingNoteView, SellerListing, SupplierItem, SalesOrder, PriceProfit, ListingLogView, eBayBusinessPolicies, ListingLog, ISupplierItem } from '../../_models/orderhistory';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ParamService } from '../../_services/param.service';
 import { ListingnoteComponent } from '../../listingnote/listingnote.component';
@@ -91,7 +91,7 @@ export class ListingdbComponent implements OnInit {
 
   listingID: number;  // Listing.ID
   listing: Listing | null;
-  walItem: SupplierItem | null = null;
+  walItem: ISupplierItem | null = null;
   userProfile: UserProfile;
   userSettingsView: UserSettingsView;
   salesOrder: SalesOrder[];
@@ -983,7 +983,7 @@ export class ListingdbComponent implements OnInit {
         // HACK
         // 04.09.2020 if i don't reassign walitem like this, then SupplierItem arrives as null on server (StoreListing)
         // why?  (but doesn't happen on new listing)
-        let supp: SupplierItem = {
+        let supp: ISupplierItem = {
           ItemURL: wi.ItemURL,
           Arrives: wi.Arrives,
           BusinessDaysArrives: wi.BusinessDaysArrives,
@@ -1009,7 +1009,8 @@ export class ListingdbComponent implements OnInit {
           VariationName: wi.VariationName,
           VariationPicURL: wi.VariationPicURL,
           usItemId: wi.usItemId,
-          SourceID: wi.SourceID
+          SourceID: wi.SourceID,
+          LowInventory: wi.LowInventory
         }
 
         this.walItem = supp;

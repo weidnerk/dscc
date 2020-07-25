@@ -229,7 +229,7 @@ export class ListingNote {
 export class ListingNoteView extends ListingNote {
     userName: string;
 }
-export class SupplierItem {
+export class SupplierItem implements ISupplierItem {
     ID: number;
     MatchCount: number;
     ItemURL: string;
@@ -256,6 +256,36 @@ export class SupplierItem {
     Warning: string[];
     Updated: Date;
     SourceID: number;
+    LowInventory: boolean;
+}
+export interface ISupplierItem {
+    ID: number;
+    MatchCount: number;
+    ItemURL: string;
+    SoldAndShippedBySupplier: boolean;
+    SupplierBrand: string;
+    SupplierPrice: number;
+    IsVariation: boolean;
+    SupplierPicURL: string;
+    UPC: string;
+    MPN: string;
+    Description: string;
+    ItemID: string;
+    OutOfStock: boolean;
+    ShippingNotAvailable: boolean;
+    Arrives: Date;
+    BusinessDaysArrives: number;
+    IsVERO: boolean;
+    VariationPicURL: string[];
+    VariationName: string;
+    usItemId: string[];
+    SupplierVariation: SupplierVariation[];
+    CanList: string[];
+    IsFreightShipping: boolean;
+    Warning: string[];
+    Updated: Date;
+    SourceID: number;
+    LowInventory: boolean;
 }
 export class SalesOrder {
     id: number;

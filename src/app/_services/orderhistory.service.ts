@@ -13,6 +13,7 @@ import { ModelView, Listing, SearchReport, SourceCategory, SellerProfile, Dashbo
 import { WalmartSearchProdIDResponse } from '../_models/walitem';
 import { environment } from '../../environments/environment';
 import { AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class OrderHistoryService {
@@ -57,7 +58,8 @@ export class OrderHistoryService {
     private getDownloadImagesUrl: string = environment.API_ENDPOINT + 'downloadimages';
     private getCompareOrdersUrl: string = environment.API_ENDPOINT + 'compareorders';
 
-    constructor(private http: HttpClient) { }
+    constructor(private router: Router,
+        private http: HttpClient) { }
 
     getProdById(): any {
         const userJson = localStorage.getItem('currentUser');
@@ -965,6 +967,10 @@ export class OrderHistoryService {
     private handleError(error: HttpErrorResponse) {
         let errMsg: string = "";
         let errDetail: string | null = null;
+        if (error.status === 401) {
+            localStorage.removeItem('currentUser');
+            this.router.navigate(['/login']);
+        }
         if (error.error) {
             if (error.error instanceof ErrorEvent) {
                 // A client-side or network error occurred. Handle it accordingly.

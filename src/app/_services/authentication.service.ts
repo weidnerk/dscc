@@ -4,11 +4,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 
 @Injectable()
 export class AuthenticationService {
-    constructor(private http: HttpClient) { }
+    constructor(private router: Router, private http: HttpClient) { }
 
     login(username: string, password: string) {
 
@@ -45,6 +46,10 @@ export class AuthenticationService {
     private handleError(error: HttpErrorResponse) {
         let errMsg: string = "";
         let errDetail: string | null = null;
+        if (error.status === 401) {
+            localStorage.removeItem('currentUser');
+            this.router.navigate(['/login']);
+        }
         if (error.error) {
             if (error.error instanceof ErrorEvent) {
                 // A client-side or network error occurred. Handle it accordingly.

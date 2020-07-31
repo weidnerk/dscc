@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, fakeAsync, tick, inject } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Listing, SupplierItem} from '../../_models/orderhistory';
 import { ListingdbComponent } from './listing.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,11 +29,9 @@ import { ParamService } from '../../_services/param.service';
 import { ListCheckService } from '../../_services/listingcheck.service';
 import { MatCardModule } from '@angular/material/card';
 import { UserService } from 'src/app/_services';
-import { UserSettingsView } from 'src/app/_models/userprofile';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-
-describe('Listing Component tests', () => {
+describe('ListingComponent', () => {
   let service: UserService;
   let component: ListingdbComponent;
   let fixture: ComponentFixture<ListingdbComponent>;
@@ -77,16 +75,19 @@ describe('Listing Component tests', () => {
         ListCheckService,
         UserService]
     })
+    /* 
+    not needed yet
     service = TestBed.get(UserService);
+    */
     fixture = TestBed.createComponent(ListingdbComponent);
     component = fixture.componentInstance;
     component.ngOnInit();
   });
 
-  it('is listing component defined', () => {
+  it('should be defined', () => {
     expect(component).toBeDefined();
   })
-  it('is form valid when empty', () => {
+  it('should be valid when not empty', () => {
 
     let listingPrice = component.listingForm.controls['listingPrice'];
     listingPrice.setValue(100.00);
@@ -105,7 +106,7 @@ describe('Listing Component tests', () => {
 
     expect(component.listingForm.valid).toBeTruthy();
   })
-  it('isFormValid', () => {
+  it('should pass isFormValid()', () => {
     component.listing = new Listing();
     component.listing.PictureURL = "www.pictureurl.com";
 
@@ -121,7 +122,7 @@ describe('Listing Component tests', () => {
 
     expect(component.isFormValid()).toBeNull();
   })
-  it('isFormValid - 0 supplier price', () => {
+  it('should not pass isFormValid() when supplier price = 0', () => {
     component.listing = new Listing();
     component.listing.PictureURL = "www.pictureurl.com";
 
@@ -137,7 +138,7 @@ describe('Listing Component tests', () => {
 
     expect(component.isFormValid()).not.toBeNull();
   })
-  it('isFormValid - listing price cannot be less than 0', () => {
+  it('should not pass isFormValid() when listing price < 0', () => {
     component.listing = new Listing();
     component.listing.PictureURL = "www.pictureurl.com";
 
@@ -145,7 +146,7 @@ describe('Listing Component tests', () => {
     listingTitle.setValue('some listing title');
 
     let listingPrice = component.listingForm.controls['listingPrice'];
-    listingTitle.setValue(-1);
+    listingPrice.setValue(-1);
 
     let description = component.listingForm.controls['description'];
     description.setValue('item description');
@@ -156,7 +157,7 @@ describe('Listing Component tests', () => {
 
     expect(component.isFormValid()).not.toBeNull();
   })
-  it('isTitleValid with comma', () => {
+  it('should not pass isTitleValid() when title has a comma', () => {
     component.listing = new Listing();
 
     let listingTitle = component.listingForm.controls['listingTitle'];
@@ -164,7 +165,7 @@ describe('Listing Component tests', () => {
 
     expect(component.isTitleValid()).not.toBeNull();
   })
-  it('isTitleValid contains SHIPPING', () => {
+  it('should not pass isTitleValid() when title contains the word, SHIPPING', () => {
     component.listing = new Listing();
 
     let listingTitle = component.listingForm.controls['listingTitle'];
@@ -172,7 +173,7 @@ describe('Listing Component tests', () => {
 
     expect(component.isTitleValid()).not.toBeNull();
   })
-  it('isTitleValid contains MULTIPLE', () => {
+  it('should not pass isTitleValid() when title contains the word, MULTIPLE', () => {
     component.listing = new Listing();
 
     let listingTitle = component.listingForm.controls['listingTitle'];

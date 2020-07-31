@@ -5,11 +5,12 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { map, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
+import { TokenService } from './token.service';
 
 
 @Injectable()
 export class AuthenticationService {
-    constructor(private router: Router, private http: HttpClient) { }
+    constructor(private router: Router, private http: HttpClient, private tokenService: TokenService) { }
 
     login(username: string, password: string) {
 
@@ -33,16 +34,14 @@ export class AuthenticationService {
                     // localStorage.setItem('userName', response.json().userName);
 
                     // localStorage.setItem('currentUser', JSON.stringify({ username: username, token: response.json().access_token }));
-                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    // localStorage.setItem('currentUser', JSON.stringify(user));
+                    this.tokenService.setAccessToken(JSON.stringify(user));
                 }
             }),
             catchError(this.handleError)
         );
     }
 
-    // public handleError(error: HttpErrorResponse) {
-    //     return observableThrowError(error);
-    // }
     private handleError(error: HttpErrorResponse) {
         let errMsg: string = "";
         let errDetail: string | null = null;

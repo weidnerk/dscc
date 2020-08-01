@@ -1033,7 +1033,7 @@ export class OrderHistoryService {
         }
         return null;
     }
-    storeProfileAdd(profile: StoreProfile) {
+    storeProfileAdd_unused(profile: StoreProfile) {
         const userJson = localStorage.getItem('currentUser');
         if (userJson) {
             let currentUser = JSON.parse(userJson);

@@ -220,13 +220,13 @@ export class SellerProfile {
     seller: string;
     note: string;
 }
-export class ListingNote {
+export interface ListingNote {
     note: string;
     itemID: string;
     updated: Date;
     storeID: number;
 }
-export class ListingNoteView extends ListingNote {
+export interface ListingNoteView extends ListingNote {
     userName: string;
 }
 export class SupplierItem implements ISupplierItem {

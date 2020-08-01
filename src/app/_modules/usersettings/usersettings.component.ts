@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { MatOption, ThemePalette } from '@angular/material/core';
 import { UserSettingsView, UserStoreView, UserSettings, eBayUser } from 'src/app/_models/userprofile';
-import { eBayBusinessPolicies, StoreProfile, eBayStore, ShippingPolicy, PaymentPolicy, ReturnPolicy } from 'src/app/_models/orderhistory';
+import { eBayBusinessPolicies, eBayStore, ShippingPolicy, PaymentPolicy, ReturnPolicy } from 'src/app/_models/orderhistory';
 import { OrderHistoryService } from 'src/app/_services/orderhistory.service';
 import { UserService } from 'src/app/_services';
 import { MatDialog } from '@angular/material/dialog';

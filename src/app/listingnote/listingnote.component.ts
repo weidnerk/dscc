@@ -49,10 +49,12 @@ export class ListingnoteComponent implements OnInit {
 
   onSubmit() {
     if (this.ctlNote.value) {
-      let listingNote = new ListingNote();
-      listingNote.note = this.ctlNote.value;
-      listingNote.itemID = this.listing.ItemID;
-      listingNote.storeID = this.listing.StoreID;
+
+      let listingNote = <ListingNote>{
+        note: this.ctlNote.value,
+        itemID: this.listing.ItemID,
+        storeID: this.listing.StoreID
+      }
 
       this.storing = true;
       this._orderHistoryService.noteStore(listingNote)

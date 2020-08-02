@@ -24,11 +24,12 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { ProgressSpinnerModule } from '../../progress-spinner/progress-spinner.module';
 
 import { GammaComponent } from './gamma.component';
-// import {routing} from './gamma.routes';
 import { GammaRoutingModule } from './gamma-routes.module';
 
 @NgModule({
-  declarations: [GammaComponent],
+  declarations: [
+    GammaComponent
+  ],
   imports: [
     GammaRoutingModule,
     CommonModule,

@@ -8,8 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 
-import { OrderHistoryService } from './_services/orderhistory.service';
-import { RenderingService } from './_services/rendering.service';
 import { AuthGuard } from './_guards/index';
 import { AuthenticationService, UserService } from './_services/index';
 import { ParamService } from './_services/param.service';
@@ -30,8 +28,7 @@ import { DefaultModule } from './layouts/default/default.module';
     BrowserAnimationsModule,
     DefaultModule // 'heavy lifting' is deferred to here
   ],
-  // entryComponents: [SellerprofileComponent, ListingnoteComponent],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, UserService, AuthGuard, AuthenticationService, OrderHistoryService, RenderingService, ParamService],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, UserService, AuthGuard, AuthenticationService, ParamService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

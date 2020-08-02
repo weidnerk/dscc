@@ -118,11 +118,8 @@ export class UserService {
      */
     UserProfileGet(): Observable<UserProfileView> {
         const userJson = localStorage.getItem('currentUser');
-        // console.log('token:' + userJson);
         if (userJson) {
-            // console.log('userJson is not null');
             let currentUser = JSON.parse(userJson);
-            // console.log(currentUser.access_token);
             let url = environment.API_ENDPOINT + "api/Account/userprofileget?userName=" + currentUser.userName;
             const httpOptions = {
                 headers: new HttpHeaders({
@@ -135,7 +132,6 @@ export class UserService {
             );
         }
         else {
-            
             return observableThrowError(
                 {
                     errMsg: "Could not obtain current user record"

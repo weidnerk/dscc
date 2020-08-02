@@ -31,8 +31,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
-  declarations: [ListingdbComponent,
-  ListinglogComponent],
+  declarations: [
+    ListingdbComponent,
+    ListinglogComponent],
   imports: [
     CommonModule,
     ListingRoutingModule,
@@ -62,5 +63,6 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     DragDropModule,
     AngularEditorModule
   ]
+
 })
 export class ListingdbModule { }

@@ -50,6 +50,7 @@ import { EndlistingComponent } from 'src/app/endlisting/endlisting.component';
 import { ErrordisplayComponent } from 'src/app/errordisplay/errordisplay.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ListCheckService } from 'src/app/_services/listingcheck.service';
+import { OrderHistoryService } from 'src/app/_services/orderhistory.service';
 
 @NgModule({
   declarations: [ 
@@ -107,7 +108,8 @@ import { ListCheckService } from 'src/app/_services/listingcheck.service';
     MatDialogModule
   ],
   providers: [
-    DashboardService, ListCheckService
+    DashboardService, ListCheckService, 
+    OrderHistoryService /* needed by sidebar */
   ]
 })
 export class DefaultModule { }

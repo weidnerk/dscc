@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { UserService } from '../_services/index';
 import { User } from '../_models/index';
 import { ThemePalette } from '@angular/material/core';
@@ -12,7 +12,6 @@ const FIRSTNAME_REGEX = /^[a-zA-Z]+$/;
 const LASTNAME_REGEX = /^[-a-zA-Z ']+$/;    // allow hyphen in last name
 
 function passwordMatcher(c: AbstractControl): { [key: string]: boolean } | null {
-    // return { nomatch: true };
     const formGroup = c.parent;
     if (formGroup) {
         const passwordControl = formGroup.get('password');

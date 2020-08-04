@@ -1,5 +1,5 @@
 
-import { throwError as observableThrowError, Observable, BehaviorSubject } from 'rxjs';
+import { throwError as observableThrowError, Observable } from 'rxjs';
 /*
 Modeled after gititems.service.ts which came from
 

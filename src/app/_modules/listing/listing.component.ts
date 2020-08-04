@@ -29,8 +29,6 @@ import { ThemePalette } from '@angular/material/core';
 })
 export class ListingdbComponent implements OnInit {
 
-  [x: string]: any;
-
   sourceValues = [
     { value: '1', viewValue: 'Walmart' }
   ];
@@ -121,6 +119,8 @@ export class ListingdbComponent implements OnInit {
   reviseLoadImages = false;
   listingButtonEnable = false;
   htmlContent = '';
+  selectedStore: number;
+  storeButtonEnable: boolean;
 
   // status spinner variables
   color: ThemePalette = 'primary';
@@ -145,7 +145,6 @@ export class ListingdbComponent implements OnInit {
   get ctlPctProfit() { return this.listingForm.controls['pctProfit']; }
   get ctlNote() { return this.listingForm.controls['note']; }
   get ctlCheckDescription() { return this.listingForm.controls['checkDescription']; }
-
   get ctlDescription() { return this.listingForm.controls['description']; }
 
 
@@ -168,7 +167,6 @@ export class ListingdbComponent implements OnInit {
     this.admin = this._orderHistoryService.isAdmin();
     this.buildForm();
     this.buildOrderForm();
-    this.buildEditorForm();
     this.getUserProfile();
 
     this.listingForm.controls['variation'].disable();
@@ -461,7 +459,7 @@ export class ListingdbComponent implements OnInit {
       let salesOrder = new SalesOrder();
       salesOrder.listedItemID = this.listing.ListedItemID;
       salesOrder.supplierOrderNumber = this.ctlSupplierOrderNum.value;
-      salesOrder.eBayOrderNumber = this.ctlEbayOrderNum.value;
+      // salesOrder.eBayOrderNumber = this.ctlEbayOrderNum.value;
       salesOrder.i_paid = this.ctlIPaid.value;
       salesOrder.qty = 1;
       this._orderHistoryService.salesOrderStore(salesOrder, ["SupplierOrderNumber", "Qty", "ListedItemID", "eBayOrderNumber", "I_Paid"])
@@ -1076,6 +1074,7 @@ export class ListingdbComponent implements OnInit {
    * 01.29.2020 Recall this won't work unless have selenium first logon to my walmart account.
    */
   getWMOrder() {
+    /*
     console.log(this.ctlEbayOrderNum.value);
     this._orderHistoryService.getWMOrder(this.ctlEbayOrderNum.value)
       .subscribe(si => {
@@ -1083,6 +1082,7 @@ export class ListingdbComponent implements OnInit {
         error => {
           this.errorMessage = error.errMsg;
         });
+        */
   }
   // Format semi colon delimited string of picture urls as one per line
   // 03.03.2019 not being used
@@ -1373,9 +1373,11 @@ export class ListingdbComponent implements OnInit {
     return this._orderHistoryService.getFirstInList(pictureURL);
   }
 
+  /*
   buildEditorForm(): void {
     this.editorForm = this.fb.group({
       htmlContent: [null]
     })
   }
+  */
 }

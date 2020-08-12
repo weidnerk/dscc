@@ -88,24 +88,9 @@ export class GammaComponent {
     this.displayProgressSpinner = true;
     this.getUserProfile();
   }
-  getStores() {
-    this._userService.getUserStores()
-      .subscribe(x => {
-        this.userStores = x;
-        this.lookupStoreProfile();
-        this.generateHeaders();
-      },
-        error => {
-          this.errorMessage = error.errMsg;
-        });
-  }
-  lookupStoreProfile() {
-    for (let m of this.userStores) {
-      if (this.selectedStore === m.storeID) {
-        this.userStoreView = m;
-      }
-    }
-  }
+  /**
+   * Set user's store setting and then get rest of his stores to populate store dropdown.
+   */
   getUserProfile() {
     this._userService.UserProfileGet()
       .subscribe(profile => {
@@ -144,6 +129,24 @@ export class GammaComponent {
           this.errorMessage = error.errMsg;
           this.displayProgressSpinner = false;
         });
+  }
+  getStores() {
+    this._userService.getUserStores()
+      .subscribe(x => {
+        this.userStores = x;
+        this.lookupStoreProfile();
+        this.generateHeaders();
+      },
+        error => {
+          this.errorMessage = error.errMsg;
+        });
+  }
+  lookupStoreProfile() {
+    for (let m of this.userStores) {
+      if (this.selectedStore === m.storeID) {
+        this.userStoreView = m;
+      }
+    }
   }
   loadData() {
     this._service.getListings(this.selectedStore, this.unlisted, this.listed)

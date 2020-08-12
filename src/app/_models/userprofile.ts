@@ -37,6 +37,7 @@ export class UserSettings {
     returnProfile: string;
     paymentProfile: string;
     maxShippingDays: number;
+    salesPermission: boolean;
 }
 
 export class UserSettingsView extends UserSettings {

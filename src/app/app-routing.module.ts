@@ -83,7 +83,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes)],    /* This lets Angular know that the AppRoutingModule is a routing module and forRoot() specifies that this is the root routing module */
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

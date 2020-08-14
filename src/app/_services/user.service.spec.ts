@@ -48,7 +48,7 @@ fdescribe('UserService', () => {
         httpTestingController.verify();
     })
 
-    it('should test', () => {
+    it('should pass getAPIKeys()', () => {
         const mockProfile: UserProfileKeysView = {
             id: 1,
             userID: "",
@@ -63,7 +63,6 @@ fdescribe('UserService', () => {
         let user = {
             access_token: "86399"
         }
-        // localStorage.setItem('currentUser', JSON.stringify(user));
         tokenService.setAccessToken(JSON.stringify(user));
         userService.getAPIKeys(1).subscribe((response: UserProfileKeysView) => {
             profileResponse = response;

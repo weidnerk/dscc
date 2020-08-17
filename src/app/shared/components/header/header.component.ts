@@ -7,7 +7,6 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  [x: string]: any;
 
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
 

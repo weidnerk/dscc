@@ -1061,18 +1061,7 @@ export class OrderHistoryService {
         var a = strList.split(';');
         return a;
     }
-    /**
-       * Get first item in semi-colon delimited string.
-       */
-    getFirstInList(item: string | null): string | null {
-        if (item) {
-            var a = item.split(';');
-            return a[0];
-        }
-        else {
-            return null;
-        }
-    }
+
     convertJSDateToString(d: Date): string {
         let day = d.getDate();       // yields date
         let month = d.getMonth() + 1;    // yields month (add one as '.getMonth()' is zero indexed)

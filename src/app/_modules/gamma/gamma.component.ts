@@ -15,7 +15,7 @@ import { OrderHistoryService } from '../../_services/orderhistory.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../_services';
 import { UserStoreView, UserSettingsView, UserProfile } from '../../_models/userprofile';
-import { fromEvent } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { MatOption, ThemePalette } from '@angular/material/core';
 
@@ -44,7 +44,7 @@ export class GammaComponent {
   userProfile: UserProfile;
   unlisted = true;
   listed = false;
-  sub: any;
+  sub: Subscription;
 
   // status spinner variables
   color:ThemePalette = 'primary';
@@ -68,6 +68,13 @@ export class GammaComponent {
   }
 
   ngOnInit() {
+    let arr = new Array<number>();
+    arr[0] = 0;
+    arr[1] = 1;
+    arr[2] = 2;
+    arr.push(3);
+    //console.log(arr[3]);
+
     fromEvent(this.filter.nativeElement, 'keyup').pipe(
       debounceTime(150),
       distinctUntilChanged())

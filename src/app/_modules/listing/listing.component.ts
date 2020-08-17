@@ -21,6 +21,7 @@ import { ErrordisplayComponent } from 'src/app/errordisplay/errordisplay.compone
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ThemePalette } from '@angular/material/core';
+import { getFirstInList } from '../../_lib/lib';
 
 @Component({
   selector: 'app-listing',
@@ -146,7 +147,6 @@ export class ListingdbComponent implements OnInit {
   get ctlNote() { return this.listingForm.controls['note']; }
   get ctlCheckDescription() { return this.listingForm.controls['checkDescription']; }
   get ctlDescription() { return this.listingForm.controls['description']; }
-
 
   get ctlFromDate() { return this.orderForm.controls['fromDate']; }
   get ctlToDate() { return this.orderForm.controls['toDate']; }
@@ -796,7 +796,7 @@ export class ListingdbComponent implements OnInit {
 
         this.statusMessage = this.delimitedToHTML(si);
         this.statusMessage += "<br/><br/>";
-        let newItemID = this._orderHistoryService.getFirstInList(si);
+        let newItemID = getFirstInList(si);
         if (newItemID) {
           let ref = "https://www.ebay.com/itm/" + newItemID;
           this.statusMessage += "<a target='_blank' href='" + ref + "'" + ">eBay</a>";
@@ -1370,7 +1370,7 @@ export class ListingdbComponent implements OnInit {
     return output;
   }
   getFirstInList(pictureURL: string) {
-    return this._orderHistoryService.getFirstInList(pictureURL);
+    return getFirstInList(pictureURL);
   }
 
   /*

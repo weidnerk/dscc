@@ -31,19 +31,19 @@ import { MatOption, ThemePalette } from '@angular/material/core';
 })
 export class DashboardComponent implements OnInit {
 
-  dashboard = new Dashboard();
-  storeAnalysis: StoreAnalysis | null;
-  errorMessage: string | null;
-  loading = false;
-  logErrorCount: number = 0;
-  logStatus: string | null = null;
-  lastErr = "";
-  isConfigured = false;
-  userStores: UserStoreView[] = [];
-  selectedStore: number = 0;
+  private dashboard = new Dashboard();
+  private storeAnalysis: StoreAnalysis | null;
+  private errorMessage: string | null;
+  private loading = false;
+  private logErrorCount: number = 0;
+  private logStatus: string | null = null;
+  private lastErr = "";
+  private isConfigured = false;
+  private userStores: UserStoreView[] = [];
+  private selectedStore: number = 0;
   userProfile: UserProfile;
-  admin = false;
-  unfulfilledOrders: number | null = null;
+  private admin = false;
+  private unfulfilledOrders: number | null = null;
 
   // status spinner variables
   color:ThemePalette = 'primary';
@@ -56,6 +56,7 @@ export class DashboardComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+
     this.loading = true;
     this.admin = this._orderHistoryService.isAdmin();
     this.getStores();

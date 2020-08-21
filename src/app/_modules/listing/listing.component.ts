@@ -307,7 +307,7 @@ export class ListingdbComponent implements OnInit {
             this.errorMessage = error.errMsg;
           });
 
-      let itemID = this.listing.ItemID;
+      const itemID = this.listing.ItemID;
       this._orderHistoryService.getSellerListing(itemID)
         .subscribe(si => {
           if (si.PictureURL === '') {
@@ -412,9 +412,9 @@ export class ListingdbComponent implements OnInit {
   }
   onSalesOrderAdd(listedItemID: string, buyer: string) {
     this.errorMessage = null;
-    let msg = this.orderFormIsValid();
+    const msg = this.orderFormIsValid();
     if (msg === null) {
-      let order = this.getSalesOrderInArray(listedItemID, buyer);
+      const order = this.getSalesOrderInArray(listedItemID, buyer);
       if (order && this.listing) {
 
         order.supplierOrderNumber = this.ctlSupplierOrderNum.value;
@@ -435,7 +435,7 @@ export class ListingdbComponent implements OnInit {
 
     this._orderHistoryService.salesOrderAdd(order)
       .subscribe(si => {
-        let updated = si;
+        const updated = si;
         this.displayProgressSpinner = false;
         console.log('sales order id: ' + updated.id);
         this.showMessage("Order saved.");
@@ -456,7 +456,7 @@ export class ListingdbComponent implements OnInit {
   }
   salesOrderStore() {
     if (this.listing) {
-      let salesOrder = new SalesOrder();
+      const salesOrder = new SalesOrder();
       salesOrder.listedItemID = this.listing.ListedItemID;
       salesOrder.supplierOrderNumber = this.ctlSupplierOrderNum.value;
       // salesOrder.eBayOrderNumber = this.ctlEbayOrderNum.value;
@@ -491,8 +491,8 @@ export class ListingdbComponent implements OnInit {
    */
   calcProfitOnOrder() {
     this.salesOrder.forEach((element) => {
-      let revenue = element.subTotal + element.shippingCost;
-      let expenses = element.finalValueFee + element.payPalFee + +this.ctlIPaid.value;
+      const revenue = element.subTotal + element.shippingCost;
+      const expenses = element.finalValueFee + element.payPalFee + +this.ctlIPaid.value;
       element.profit = revenue - expenses;
       element.profitMargin = (element.profit / element.total);
     });
@@ -524,7 +524,7 @@ export class ListingdbComponent implements OnInit {
       if (!this.ctlListingTitle.value) {
         return 'Validation: listing title';
       }
-      let validTitle: string | null = this.isTitleValid();
+      const validTitle: string | null = this.isTitleValid();
       if (validTitle) {
         return validTitle;
       }
@@ -684,7 +684,7 @@ export class ListingdbComponent implements OnInit {
   onCreateListing() {
     if (this.listing) {
       // seller's image is only available when first saving record.
-      let sellerImgURL = this.listing.SellerListing?.PictureURL;
+      const sellerImgURL = this.listing.SellerListing?.PictureURL;
       let tmsg = "<b>" + this.userSettingsView.storeName + "</b><br/><br/>Please confirm supplier item matches seller's item.<br/><br/>";
       tmsg += this.listing.PrimaryCategoryID + "<br/>";
       tmsg += this.listing.PrimaryCategoryName + "<br/><br/>";
@@ -716,7 +716,7 @@ export class ListingdbComponent implements OnInit {
           if (result === 'Yes') {
             if (this.listing) {
               if (this.listing.Warning && this.listing.Warning.length > 0) {
-                let tmsg = "<b>" + this.userSettingsView.storeName + "</b><br/><br/>Please confirm you are overriding warnings.<br/><br/>";
+                const tmsg = "<b>" + this.userSettingsView.storeName + "</b><br/><br/>Please confirm you are overriding warnings.<br/><br/>";
                 const dialogRef = this.dialog.open(ConfirmComponent,
                   {
                     disableClose: true,
@@ -748,7 +748,7 @@ export class ListingdbComponent implements OnInit {
       }
       else {
         if (this.listing.Warning && this.listing.Warning.length > 0) {
-          let tmsg = "<b>" + this.userSettingsView.storeName + "</b><br/><br/>Please confirm you are overriding warnings.<br/><br/>";
+          const tmsg = "<b>" + this.userSettingsView.storeName + "</b><br/><br/>Please confirm you are overriding warnings.<br/><br/>";
           const dialogRef = this.dialog.open(ConfirmComponent,
             {
               disableClose: true,
@@ -796,9 +796,9 @@ export class ListingdbComponent implements OnInit {
 
         this.statusMessage = this.delimitedToHTML(si);
         this.statusMessage += "<br/><br/>";
-        let newItemID = getFirstInList(si);
+        const newItemID = getFirstInList(si);
         if (newItemID) {
-          let ref = "https://www.ebay.com/itm/" + newItemID;
+          const ref = "https://www.ebay.com/itm/" + newItemID;
           this.statusMessage += "<a target='_blank' href='" + ref + "'" + ">eBay</a>";
           if (this.listing) {
             this.listing.ListedItemID = newItemID;
@@ -818,7 +818,7 @@ export class ListingdbComponent implements OnInit {
         });
   }
   onOverrideEndListing(status: string) {
-    let pos: number = status.indexOf('NO');
+    const pos: number = status.indexOf('NO');
     if (pos > -1) {
       return false;
     }
@@ -981,7 +981,7 @@ export class ListingdbComponent implements OnInit {
         // HACK
         // 04.09.2020 if i don't reassign walitem like this, then SupplierItem arrives as null on server (StoreListing)
         // why?  (but doesn't happen on new listing)
-        let supp: ISupplierItem = {
+        const supp: ISupplierItem = {
           ItemURL: wi.ItemURL,
           Arrives: wi.Arrives,
           BusinessDaysArrives: wi.BusinessDaysArrives,
@@ -1042,7 +1042,7 @@ export class ListingdbComponent implements OnInit {
       this._orderHistoryService.calculateWMPx(this.walItem.SupplierPrice, this.ctlPctProfit.value)
         .subscribe(wi => {
           this.priceProfit = wi;
-          let px = (Math.round(wi.proposePrice * 100) / 100).toFixed(2);
+          const px = (Math.round(wi.proposePrice * 100) / 100).toFixed(2);
           this.listingForm.patchValue({
             listingPrice: px.toString()
           });
@@ -1148,8 +1148,8 @@ export class ListingdbComponent implements OnInit {
   }
 
   buildOrderForm(): void {
-    let fromDate = this.getFormattedDate(new Date());
-    let toDate = this.getFormattedDate(this._orderHistoryService.addDays(new Date(), 1));
+    const fromDate = this.getFormattedDate(new Date());
+    const toDate = this.getFormattedDate(this._orderHistoryService.addDays(new Date(), 1));
     this.orderForm = this.fb.group({
       ipaid: [null, {
         validators: [Validators.required, this._orderHistoryService.validateRequiredNumeric.bind(this)]
@@ -1280,7 +1280,7 @@ export class ListingdbComponent implements OnInit {
       return false;
   }
   listButtonDisable(): boolean {
-    let formIsDirty = this.formIsDirty();
+    const formIsDirty = this.formIsDirty();
     if (!this.listingForm.valid || !this.walItem || formIsDirty || !this.listingButtonEnable)
       return true;
     else
@@ -1331,7 +1331,7 @@ export class ListingdbComponent implements OnInit {
 
   getFormattedDate(date: Date) {
     // let date = new Date();
-    let newdate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+    const newdate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
     return newdate;
   }
   orderFormIsValid(): string | null {

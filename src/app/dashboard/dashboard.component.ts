@@ -31,19 +31,19 @@ import { MatOption, ThemePalette } from '@angular/material/core';
 })
 export class DashboardComponent implements OnInit {
 
-  private dashboard = new Dashboard();
-  private storeAnalysis: StoreAnalysis | null;
-  private errorMessage: string | null;
+  dashboard = new Dashboard();
+  storeAnalysis: StoreAnalysis | null;
+  errorMessage: string | null;
   private loading = false;
   private logErrorCount: number = 0;
   private logStatus: string | null = null;
   private lastErr = "";
-  private isConfigured = false;
-  private userStores: UserStoreView[] = [];
-  private selectedStore: number = 0;
+  isConfigured = false;
+  userStores: UserStoreView[] = [];
+  selectedStore: number = 0;
   userProfile: UserProfile;
-  private admin = false;
-  private unfulfilledOrders: number | null = null;
+  admin = false;
+  unfulfilledOrders: number | null = null;
 
   // status spinner variables
   color:ThemePalette = 'primary';

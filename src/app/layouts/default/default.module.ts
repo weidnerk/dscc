@@ -115,7 +115,8 @@ import { InterceptorService } from '../../_services/index';
       useClass: InterceptorService,
       multi: true
       },
-    DashboardService, ListCheckService, 
+    DashboardService, 
+    ListCheckService, /* still needed by Listing? */
     OrderHistoryService /* needed by sidebar */
   ]
 })

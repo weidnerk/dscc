@@ -79,6 +79,14 @@ const routes: Routes = [
     },
     { path: 'forgotpassword', 
         component: ForgotpasswordComponent
+    },
+    { path: '**', 
+        component: DefaultComponent,
+        children: [{
+            path: '',
+            component: DashboardComponent,
+            canActivate: [AuthGuard]
+        }],
     }
 ];
 

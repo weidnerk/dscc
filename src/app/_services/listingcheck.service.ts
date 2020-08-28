@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEventType, HttpEvent, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { SourceCategory } from '../_models/orderhistory';
 
-import { catchError } from 'rxjs/internal/operators';
+import { catchError } from 'rxjs/operators';
 
 import { SearchReport, SearchHistoryView } from '../_models/orderhistory';
 import { environment } from '../../environments/environment';

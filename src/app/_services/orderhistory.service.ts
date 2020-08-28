@@ -7,7 +7,7 @@ Modeled after gititems.service.ts which came from
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEventType, HttpEvent, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
-import { catchError } from 'rxjs/internal/operators';
+import { catchError } from 'rxjs/operators';
 
 import { ModelView, Listing, SearchReport, SourceCategory, SellerProfile, Dashboard, ListingNote, ListingNoteView, ListingView, OrderHistory, SellerListing, SupplierItem, UpdateToListing, SalesOrder, PriceProfit, ListingLogView, eBayBusinessPolicies, StoreAnalysis, ListingLog, StoreProfile } from '../_models/orderhistory';
 import { WalmartSearchProdIDResponse } from '../_models/walitem';

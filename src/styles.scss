@@ -30,13 +30,13 @@ input {
     border-left: 5px solid lightgray;
     margin: 4px 0;
 }
-
+// end - needed for mat input boxes
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .cellright {
     text-align: right;
     justify-content: flex-end;
 }
 .cellcenter {
     text-align: center;
-    // justify-content: flex-end;
 }

@@ -7,7 +7,7 @@ Modeled after gititems.service.ts which came from
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEventType, HttpEvent, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
-import {catchError} from 'rxjs/internal/operators';
+import {catchError} from 'rxjs/operators';
 
 import { TimesSold, ModelViewTimesSold } from '../_models/orderhistory';
 import { environment } from '../../environments/environment';

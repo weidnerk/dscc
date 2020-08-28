@@ -1118,8 +1118,12 @@ export class ListingdbComponent implements OnInit {
    */
   buildForm(): void {
     this.listingForm = this.fb.group({
-      listingTitle: [null, Validators.compose([Validators.maxLength(80)])],
-      listingPrice: [null, Validators.compose([Validators.required, this._orderHistoryService.validateRequiredNumeric.bind(this)])],
+      listingTitle: [null, 
+        Validators.compose([Validators.maxLength(80)])
+      ],
+      listingPrice: [null, 
+        Validators.compose([Validators.required, this._orderHistoryService.validateRequiredNumeric.bind(this)])
+      ],
       profit: [null],
       listingQty: [1, {
         validators: [Validators.required, this._orderHistoryService.validateRequiredNumeric.bind(this)]

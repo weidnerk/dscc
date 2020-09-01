@@ -1018,6 +1018,8 @@ export class OrderHistoryService {
         }
         return false;
     }
+
+    // For custom validators, why not follow https://www.youtube.com/watch?v=nm-x8gsqB2E
     validateRequiredNumeric(c: AbstractControl) {
         if (c.value === null) {
             return { error: true };

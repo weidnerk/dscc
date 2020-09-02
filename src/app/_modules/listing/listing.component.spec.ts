@@ -181,4 +181,12 @@ describe('ListingComponent', () => {
 
     expect(component.isTitleValid()).not.toBeNull();
   })
+  it('should not pass isTitleValid() when title contains a forward slash', () => {
+    component.listing = new Listing();
+
+    let listingTitle = component.listingForm.controls['listingTitle'];
+    listingTitle.setValue('Sample listing title w/forward slash.');
+
+    expect(component.isTitleValid()).not.toBeNull();
+  })
 });

@@ -555,6 +555,10 @@ export class ListingdbComponent implements OnInit {
         if (pos > -1) {
           return "Validation: listing title contains MULTIPLE";
         }
+        pos = this.ctlListingTitle.value.indexOf("/");
+        if (pos > -1) {
+          return "Validation: listing title contains forward slash";
+        }
       }
       return null;
     }

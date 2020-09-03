@@ -559,6 +559,10 @@ export class ListingdbComponent implements OnInit {
         if (pos > -1) {
           return "Validation: listing title contains forward slash";
         }
+        pos = this.ctlListingTitle.value.indexOf("-");
+        if (pos > -1) {
+          return "Validation: listing title contains hyphen";
+        }
       }
       return null;
     }

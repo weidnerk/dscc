@@ -32,7 +32,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ProgressSpinnerModule } from 'src/app/progress-spinner/progress-spinner.module';
-import { OrdersComponent } from 'src/app/orders/orders.component';
 import { LoginComponent } from 'src/app/login/login.component';
 import { MatPassToggleVisibilityComponent } from 'src/app/mat-pass-toggle-visibility/mat-pass-toggle-visibility.component';
 import { RegisterComponent } from 'src/app/register/register.component';
@@ -60,7 +59,6 @@ import { InterceptorService } from '../../_services/index';
     DashboardComponent,
     Dashboardv2Component,
     TimesSoldComponent,
-    OrdersComponent,
     LoginComponent,
     MatPassToggleVisibilityComponent,
     RegisterComponent,

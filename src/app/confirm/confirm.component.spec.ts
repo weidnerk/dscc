@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConfirmComponent } from './confirm.component';
+import { OrderHistoryService } from '../_services/orderhistory.service';
 
 xdescribe('ConfirmComponent', () => {
   let component: ConfirmComponent;
@@ -8,7 +9,9 @@ xdescribe('ConfirmComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmComponent ]
+      declarations: [ ConfirmComponent ],
+      providers: [
+        OrderHistoryService]
     })
     .compileComponents();
   }));

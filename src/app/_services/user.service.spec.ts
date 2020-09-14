@@ -4,7 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { UserProfileKeysView } from '../_models/userprofile';
 import { RouterModule } from '@angular/router';
 
-fdescribe('UserService', () => {
+describe('UserService', () => {
     let httpTestingController: HttpTestingController;
     let userService: UserService;
     let tokenService: TokenService;

@@ -38,12 +38,11 @@ export class ListinglogComponent {
   unlisted = true;
   listed = false;
   private sub: any;
-  // listingID: number; 
 
   // status spinner variables
-  color:ThemePalette = 'primary';
-  mode:"determinate" | "indeterminate" | undefined = 'indeterminate';
-  value:number = 50;
+  color: ThemePalette = 'primary';
+  mode: "determinate" | "indeterminate" | undefined = 'indeterminate';
+  value: number = 50;
   displayProgressSpinner = false;
 
   constructor(private route: Router,
@@ -61,22 +60,7 @@ export class ListinglogComponent {
   }
 
   ngOnInit() {
-    // this.sub = this.activeroute.params.subscribe(params => {
-    //   this.listingID = params['listingID'];
-    //   if (this.listingID > 0) {
-        this.loadData();
-      // }
-    // });
-
-    // fromEvent(this.filter.nativeElement, 'keyup').pipe(
-    //   debounceTime(150),
-    //   distinctUntilChanged())
-    //   .subscribe(() => {
-    //     if (!this.dataSource) {
-    //       return;
-    //     }
-    //     this.dataSource.filter = this.filter.nativeElement.value;
-    //   });
+    this.loadData();
   }
   /**
    * I refactored using this:

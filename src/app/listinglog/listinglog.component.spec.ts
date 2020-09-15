@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListinglogComponent } from './listinglog.component';
+import { RouterModule } from '@angular/router';
+import { OrderHistoryService } from '../_services/orderhistory.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 xdescribe('ListinglogComponent', () => {
   let component: ListinglogComponent;
@@ -8,9 +11,12 @@ xdescribe('ListinglogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListinglogComponent ]
+      declarations: [ListinglogComponent],
+      imports: [HttpClientTestingModule,
+        RouterModule.forRoot([])],
+      providers: [OrderHistoryService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

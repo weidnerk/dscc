@@ -3,9 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { ScanhistoryComponent } from './scanhistory/scanhistory.component';
-import { ResearchComponent } from './research/cr.component';
-import { TimesSoldComponent } from './timessold/timessold.component';
 import { AuthGuard } from './_guards/index';
 import { Dashboardv2Component } from './dashboard-v2/dashboard.component';
 import { DefaultComponent } from './layouts/default/default.component';
@@ -27,11 +24,6 @@ const routes: Routes = [
             canActivate: [AuthGuard]
         },
         {
-            path: 'scanhistory',
-            component: ScanhistoryComponent,
-            canActivate: [AuthGuard]
-        },
-        {
             path: 'gamma/:listed',
             loadChildren: () => import('./_modules/gamma/gamma.module').then(m => m.GammaModule),
             canActivate: [AuthGuard]
@@ -39,11 +31,6 @@ const routes: Routes = [
         {
             path: 'gamma',
             loadChildren: () => import('./_modules/gamma/gamma.module').then(m => m.GammaModule),
-            canActivate: [AuthGuard]
-        },
-        {
-            path: 'research',
-            component: ResearchComponent,
             canActivate: [AuthGuard]
         },
         {
@@ -60,10 +47,6 @@ const routes: Routes = [
             path: 'usersettings',
             loadChildren: () => import('./_modules/usersettings/usersettings.module').then(m => m.UsersettingsModule),
             canActivate: [AuthGuard]
-        },
-        { path: 'scanseller', 
-            component: TimesSoldComponent, 
-            canActivate: [AuthGuard] 
         },
         { path: 'changepassword', 
             component: ChangepasswordComponent

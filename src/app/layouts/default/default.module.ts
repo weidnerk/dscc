@@ -26,7 +26,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { AppOverlayModule } from 'src/app/overlay/overlay.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { TimesSoldComponent } from 'src/app/timessold/timessold.component';
 import { FormsModule, ReactiveFormsModule }    from '@angular/forms'; // not everything in its own module (like login)
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -38,10 +37,8 @@ import { RegisterComponent } from 'src/app/register/register.component';
 import { ChangepasswordComponent } from 'src/app/changepassword/changepassword.component';
 import { ForgotpasswordComponent } from 'src/app/forgotpassword/forgotpassword.component';
 import { PasswordresetComponent } from 'src/app/passwordreset/passwordreset.component';
-import { ScanhistoryComponent } from 'src/app/scanhistory/scanhistory.component';
 import { SellerprofileComponent } from 'src/app/sellerprofile/sellerprofile.component';
 import { ListingnoteComponent } from 'src/app/listingnote/listingnote.component';
-import { ResearchComponent } from 'src/app/research/cr.component';
 import { DashboardComponent } from 'src/app/dashboard/dashboard.component';
 import { ShowmessagesComponent } from 'src/app/showmessages/showmessages.component';
 import { ConfirmComponent } from 'src/app/confirm/confirm.component';
@@ -58,17 +55,14 @@ import { InterceptorService } from '../../_services/index';
     DefaultComponent,
     DashboardComponent,
     Dashboardv2Component,
-    TimesSoldComponent,
     LoginComponent,
     MatPassToggleVisibilityComponent,
     RegisterComponent,
     ChangepasswordComponent,
     ForgotpasswordComponent,
     PasswordresetComponent,
-    ScanhistoryComponent,
     SellerprofileComponent,
     ListingnoteComponent,
-    ResearchComponent,
     ShowmessagesComponent,
     ConfirmComponent,
     EndlistingComponent,

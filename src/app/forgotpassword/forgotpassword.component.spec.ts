@@ -1,16 +1,28 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ForgotpasswordComponent } from './forgotpassword.component';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserService } from '../_services';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-xdescribe('ForgotpasswordComponent', () => {
+describe('ForgotpasswordComponent', () => {
   let component: ForgotpasswordComponent;
   let fixture: ComponentFixture<ForgotpasswordComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ForgotpasswordComponent ]
+      declarations: [ForgotpasswordComponent],
+      imports:
+        [HttpClientTestingModule,
+          FormsModule,
+          ReactiveFormsModule,
+          RouterModule.forRoot([])],
+      providers: [
+        UserService
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

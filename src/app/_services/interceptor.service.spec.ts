@@ -1,12 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
 import { InterceptorService } from './interceptor.service';
+import { RouterModule } from '@angular/router';
 
-xdescribe('InterceptorService', () => {
+describe('InterceptorService', () => {
   let service: InterceptorService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [RouterModule.forRoot([])],
+      providers: [
+        InterceptorService
+      ]
+    });
     service = TestBed.inject(InterceptorService);
   });
 

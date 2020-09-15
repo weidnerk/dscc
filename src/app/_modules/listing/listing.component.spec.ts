@@ -65,7 +65,6 @@ describe('ListingComponent', () => {
           MatTabsModule,
           AppOverlayModule,
           ProgressSpinnerModule,
-          HttpClientModule,
           MatCardModule,
           RouterModule.forRoot([])
         ],

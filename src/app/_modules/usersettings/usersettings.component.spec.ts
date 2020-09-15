@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UsersettingsComponent } from './usersettings.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OrderHistoryService } from 'src/app/_services/orderhistory.service';
+import { RouterModule } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { UserService } from 'src/app/_services';
+import { MatDialogModule } from '@angular/material/dialog';
 
 xdescribe('UsersettingsComponent', () => {
   let component: UsersettingsComponent;
@@ -8,9 +14,16 @@ xdescribe('UsersettingsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UsersettingsComponent ]
+      declarations: [UsersettingsComponent],
+      imports: [HttpClientTestingModule,
+        MatDialogModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forRoot([])],
+      providers: [OrderHistoryService,
+        UserService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

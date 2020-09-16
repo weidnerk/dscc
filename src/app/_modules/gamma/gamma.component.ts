@@ -27,8 +27,8 @@ import { MatOption, ThemePalette } from '@angular/material/core';
 export class GammaComponent {
   displayedColumns: string[] = [];
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
 
   toListingCount: number;

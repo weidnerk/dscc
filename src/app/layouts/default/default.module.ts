@@ -21,7 +21,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardService } from 'src/app/_services/dashboard.service';
 import { DefaultComponent } from './default.component';
-import { Dashboardv2Component } from 'src/app/dashboard-v2/dashboard.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AppOverlayModule } from 'src/app/overlay/overlay.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -54,7 +53,6 @@ import { InterceptorService } from '../../_services/index';
   declarations: [ 
     DefaultComponent,
     DashboardComponent,
-    Dashboardv2Component,
     LoginComponent,
     MatPassToggleVisibilityComponent,
     RegisterComponent,

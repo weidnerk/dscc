@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import * as Highcharts from 'highcharts';
-import HC_exporting from 'highcharts/modules/exporting';
 
 @Component({
   selector: 'app-widget-pie',
@@ -9,7 +7,6 @@ import HC_exporting from 'highcharts/modules/exporting';
 })
 export class PieComponent implements OnInit {
 
-  Highcharts = Highcharts;
   chartOptions = {};
 
   @Input() data = [];
@@ -53,7 +50,6 @@ export class PieComponent implements OnInit {
       }]
     };
 
-    HC_exporting(Highcharts);
 
     setTimeout(() => {
       window.dispatchEvent(

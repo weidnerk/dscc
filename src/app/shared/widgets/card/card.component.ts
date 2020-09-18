@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import * as Highcharts from 'highcharts';
-import HC_exporting from 'highcharts/modules/exporting';
 
 @Component({
   selector: 'app-widget-card',
@@ -14,7 +12,6 @@ export class CardComponent implements OnInit {
   @Input() percentage: string;
   @Input() data = [];
 
-  Highcharts = Highcharts;
   chartOptions = {};
 
   constructor() { }
@@ -74,7 +71,6 @@ export class CardComponent implements OnInit {
       }]
     };
 
-    HC_exporting(Highcharts);
 
     setTimeout(() => {
       window.dispatchEvent(

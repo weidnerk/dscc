@@ -11,34 +11,34 @@
     <mat-card>
         <!-- <div class="container-fluid"> -->
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 Repricer last ran:
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 {{dashboard.repricerLastRan | date: 'MM/dd/yyyy hh:mm a'}}
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 Repricer elapsed time:
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 {{dashboard.repricerElapsedTime | number:'1.2-2'}}
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 Listed in store:
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 {{dashboard.listed}}
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 Out-of-stock:
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 {{dashboard.oos}}
                 <!-- <span *ngIf="loading">
                     <img
@@ -47,21 +47,21 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 Not listed:
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 {{dashboard.notListed}}
             </div>
         </div>
         <br />
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 SCAN STORE
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 db is missing items:
             </div>
             <div *ngIf="storeAnalysis" class="col-3">
@@ -69,19 +69,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 Qty mismatch:
             </div>
-            <div *ngIf="storeAnalysis" class="col-3">
+            <div *ngIf="storeAnalysis" class="col-4">
                 {{storeAnalysis.qtyMismatch.length}}
             </div>
         </div>
         <br/>
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 Unfulfilled:
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 {{unfulfilledOrders}}
             </div>
         </div>

@@ -4,7 +4,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './_guards/index';
-import { Dashboardv2Component } from './dashboard-v2/dashboard.component';
 import { DefaultComponent } from './layouts/default/default.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
@@ -16,11 +15,6 @@ const routes: Routes = [
         children: [{
             path: '',
             component: DashboardComponent,
-            canActivate: [AuthGuard]
-        },
-        {
-            path: 'dashboardv2',
-            component: Dashboardv2Component,
             canActivate: [AuthGuard]
         },
         {

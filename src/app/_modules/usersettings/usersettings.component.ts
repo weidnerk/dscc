@@ -32,7 +32,7 @@ export class UsersettingsComponent implements OnInit {
   userSettingsView: UserSettingsView;
   errorMessage: string | null;
   userStores: UserStoreView[];
-  selectedStore: number;
+  selectedStore: number = 0;
   eBayBusinessPolicies: eBayBusinessPolicies;
   eBayUser: eBayUser;
   ebayStore: eBayStore;

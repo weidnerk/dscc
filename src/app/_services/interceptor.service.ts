@@ -18,7 +18,13 @@ export class InterceptorService implements HttpInterceptor {
   }
   intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
-    return next.handle(req).pipe(catchError(err => {
+
+      // https://spring.io/guides/tutorials/spring-security-and-angular-js/
+      // https://stackoverflow.com/questions/49097716/how-to-disable-browser-basic-authentication-popup-angular-5-spring-security
+    const xhr = req.clone({
+      headers: req.headers.set('X-Requested-With', 'XMLHttpRequest')
+    });
+    return next.handle(xhr).pipe(catchError(err => {
       if (err.status === 401) {
         localStorage.removeItem('currentUser');
         this.router.navigate(['/login']);

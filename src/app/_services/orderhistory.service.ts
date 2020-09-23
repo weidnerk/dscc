@@ -14,6 +14,7 @@ import { WalmartSearchProdIDResponse } from '../_models/walitem';
 import { environment } from '../../environments/environment';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TokenService } from './token.service';
 
 @Injectable()
 export class OrderHistoryService {
@@ -59,10 +60,11 @@ export class OrderHistoryService {
     private getCompareOrdersUrl: string = environment.API_ENDPOINT + 'compareorders';
 
     constructor(private router: Router,
-        private http: HttpClient) { }
+        private http: HttpClient,
+        private tokenService: TokenService) { }
 
     getProdById(): any {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             const httpOptions = {
@@ -85,7 +87,7 @@ export class OrderHistoryService {
     }
 
     getNumItems(seller: string, daysBack: number, resultsPerPg: number, minSold: number): Observable<ModelView> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             const httpOptions = {
@@ -117,7 +119,7 @@ export class OrderHistoryService {
     //
     // If, for example, you ask eBay for last 7 days of sold listings, it includes Ended listings in last 7 days even if nothing sold in last 7 days.
     getOrderHistory(seller: string, daysBack: number, resultsPerPg: number, rptNumber: number, minSold: number): Observable<ModelView> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             const httpOptions = {
@@ -150,7 +152,7 @@ export class OrderHistoryService {
      * @param itemId
      */
     getSellerListing(itemId: string): Observable<SellerListing> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getSellerListingUrl + "?userName=" + currentUser.userName
@@ -174,7 +176,7 @@ export class OrderHistoryService {
     }
 
     getSellerProfile(seller: string): Observable<SellerProfile> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getSellerProfileUrl + "?userName=" + currentUser.userName
@@ -198,7 +200,7 @@ export class OrderHistoryService {
     }
 
     getListingNotes(itemID: string, storeID: number): Observable<ListingNoteView[]> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getListingNoteUrl + "?userName=" + currentUser.userName
@@ -223,7 +225,7 @@ export class OrderHistoryService {
     }
 
     getDashboard(storeID: number): Observable<Dashboard> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getDashboardUrl + "?storeID=" + storeID;
@@ -245,7 +247,7 @@ export class OrderHistoryService {
             )
     }
     getStoreAnalysis(storeID: number): Observable<StoreAnalysis> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getStoreAnalysisUrl + "?storeID=" + storeID;
@@ -267,7 +269,7 @@ export class OrderHistoryService {
             )
     }
     getWmDerived(sourceUrl: string): Observable<number> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getWmDerivedUrl + "?userName=" + currentUser.userName
@@ -290,7 +292,7 @@ export class OrderHistoryService {
             )
     }
     getFindError(filename: string): Observable<number> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getFindErrorUrl + "?userName=" + currentUser.userName
@@ -313,7 +315,7 @@ export class OrderHistoryService {
             )
     }
     getLastError(filename: string): Observable<string> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getLastErrorUrl + "?userName=" + currentUser.userName
@@ -336,7 +338,7 @@ export class OrderHistoryService {
             )
     }
     getWmItem(sourceUrl: string): Observable<SupplierItem> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getWmItemUrl + "?userName=" + currentUser.userName
@@ -359,7 +361,7 @@ export class OrderHistoryService {
             )
     }
     getListingBySupplierURL(storeID: number, URL: string): Observable<Listing> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getListingBySupplierURLUrl
@@ -383,7 +385,7 @@ export class OrderHistoryService {
             )
     }
     calculateWMPx(supplierPrice: number, pctProfit: number): Observable<PriceProfit> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let url = this.calculateWMPxUrl + "?supplierPrice=" + supplierPrice.toString() + "&pctProfit=" + pctProfit.toString();
             let currentUser = JSON.parse(userJson);
@@ -405,7 +407,7 @@ export class OrderHistoryService {
             )
     }
     calculateProfit(listingPrice: number, supplierPrice: number): Observable<number> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let url = this.calculateProfitUrl
                 + "?listingPrice=" + listingPrice
@@ -429,7 +431,7 @@ export class OrderHistoryService {
             )
     }
     listingCreate(listingID: number, reviseUploadImages: boolean): Observable<string> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.createListingUrl + "?userName=" + currentUser.userName
@@ -453,7 +455,7 @@ export class OrderHistoryService {
             )
     }
     variationListingCreate(): Observable<string> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.createVariationListingUrl;
@@ -475,7 +477,7 @@ export class OrderHistoryService {
             )
     }
     deleteListingRecord(listingID: number) {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = `${this.deleteListingRecordUrl}/${listingID}`;
@@ -497,7 +499,7 @@ export class OrderHistoryService {
             )
     }
     listingStore(listing: Listing, updateItemSpecifics: boolean, fieldNames: string[]): Observable<Listing> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.storeListingUrl + "?updateItemSpecifics=" + updateItemSpecifics;
@@ -520,7 +522,7 @@ export class OrderHistoryService {
         )
     }
     salesOrderStore(salesOrder: SalesOrder, fieldNames: string[]) {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.storeSalesOrderUrl;
@@ -544,7 +546,7 @@ export class OrderHistoryService {
         )
     }
     salesOrderAdd(salesOrder: SalesOrder): Observable<SalesOrder> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.salesOrderAddUrl;
@@ -567,7 +569,7 @@ export class OrderHistoryService {
         )
     }
     noteStore(listingNote: ListingNote) {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.storeNoteUrl;
@@ -594,7 +596,7 @@ export class OrderHistoryService {
      * @param oh 
      */
     toListUpdate(obj: UpdateToListing, fieldNames: string[]) {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.updateToListingUrl;
@@ -622,7 +624,7 @@ export class OrderHistoryService {
      * @param listing 
      */
     setOrder(listing: Listing, fromDate: Date, toDate: Date): Observable<SalesOrder[]> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.setOrderUrl
@@ -648,7 +650,7 @@ export class OrderHistoryService {
         )
     }
     getOrders(fromDate: Date, toDate: Date, orderStatus: string): Observable<SalesOrder[]> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getOrdersUrl
@@ -672,7 +674,7 @@ export class OrderHistoryService {
         )
     }
     getWMOrder(orderURL: string) {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getWMOrderUrl
@@ -695,7 +697,7 @@ export class OrderHistoryService {
     }
 
     sellerProfileStore(sellerProfile: SellerProfile) {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.storeSellerProfileUrl;
@@ -718,7 +720,7 @@ export class OrderHistoryService {
     }
 
     listingGet(listingID: number): Observable<Listing> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getListingUrl + "?listingID=" + listingID
@@ -740,7 +742,7 @@ export class OrderHistoryService {
             )
     }
     supplierItemGet(ID: number): Observable<SupplierItem> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getSupplierItemUrl + "?ID=" + ID
@@ -769,7 +771,7 @@ export class OrderHistoryService {
      * @param listed  only care about True value
      */
     getListings(storeID: number, unlisted: boolean, listed: boolean): Observable<ListingView[]> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = `${this.getListingsUrl}/${storeID}/${unlisted}/${listed}`;
@@ -791,7 +793,7 @@ export class OrderHistoryService {
             )
     }
     walmartSearchProdID(search: string): Observable<WalmartSearchProdIDResponse> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             const httpOptions = {
@@ -817,7 +819,7 @@ export class OrderHistoryService {
      * Send records in OrderHistory where ToListing=1 to Listing table.
      */
     storeToListing(storeID: number): Observable<string> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.storeToListingUrl + "?userName=" + currentUser.userName + "&storeID=" + storeID;
@@ -840,7 +842,7 @@ export class OrderHistoryService {
             )
     }
     refreshItemSpecifics(ID: number): Observable<string> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.refreshItemSpecificsUrl + "?ID=" + ID;
@@ -863,7 +865,7 @@ export class OrderHistoryService {
             )
     }
     getBusinessPolicies(storeID: number): Observable<eBayBusinessPolicies> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getBusinessPoliciesUrl + "?storeID=" + storeID;
@@ -885,7 +887,7 @@ export class OrderHistoryService {
             )
     }
     getListingLog(listingID: number): Observable<ListingLogView[]> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getListingLogUrl + "?listingID=" + listingID;
@@ -908,7 +910,7 @@ export class OrderHistoryService {
     }
 
     listingLogAdd(log: ListingLog) {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
 
@@ -932,7 +934,7 @@ export class OrderHistoryService {
         )
     }
     compareOrders(storeID: number, fromDate: Date, toDate: Date): Observable<number> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let newToDate:string = this.convertJSDateToString(toDate);
@@ -1006,7 +1008,7 @@ export class OrderHistoryService {
             });
     }
     isAdmin(): boolean {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             if (currentUser) {
@@ -1036,7 +1038,7 @@ export class OrderHistoryService {
         return null;
     }
     storeProfileAdd_unused(profile: StoreProfile) {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
 

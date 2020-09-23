@@ -12,6 +12,7 @@ import { catchError } from 'rxjs/operators';
 
 import { SearchReport, SearchHistoryView } from '../_models/orderhistory';
 import { environment } from '../../environments/environment';
+import { TokenService } from './token.service';
 
 @Injectable()
 export class ListCheckService {
@@ -26,10 +27,11 @@ export class ListCheckService {
     private getSearchHistoryUrl: string = environment.API_ENDPOINT + 'getsearchhistory';
     private deleteScanUrl: string = environment.API_ENDPOINT + 'deletescan';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient,
+        private tokenService: TokenService) { }
 
     getSearchHistory(): Observable<SearchHistoryView[]> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getSearchHistoryUrl + "?userName=" + currentUser.userName;
@@ -52,7 +54,7 @@ export class ListCheckService {
     }
 
     deleteScan(rptNumber: number) {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = `${this.deleteScanUrl}/${rptNumber}`;
@@ -75,7 +77,7 @@ export class ListCheckService {
     }
 
     endListing(listedID: number, reason: string): Observable<string> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.endListingUrl
@@ -100,7 +102,7 @@ export class ListCheckService {
     }
 
     getCategories(source: number): Observable<SourceCategory[]> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getCategoriesUrl + "?userName=" + currentUser.userName

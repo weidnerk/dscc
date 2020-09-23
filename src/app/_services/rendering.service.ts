@@ -11,6 +11,7 @@ import {catchError} from 'rxjs/operators';
 
 import { TimesSold, ModelViewTimesSold } from '../_models/orderhistory';
 import { environment } from '../../environments/environment';
+import { TokenService } from './token.service';
 
 @Injectable()
 export class RenderingService {
@@ -19,7 +20,8 @@ export class RenderingService {
     private getTimesSoldsUrl: string = environment.API_ENDPOINT + 'getreport';
     private getFillMatchUrl: string = environment.API_ENDPOINT + 'fillmatch';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient,
+        private tokenService: TokenService) { }
 
     renderTimesSold(
         rptNumber: number, 
@@ -37,7 +39,7 @@ export class RenderingService {
         excludeListed: boolean | null,
         excludeFreight: boolean | null): Observable<ModelViewTimesSold> {
         let url = `${this.getTimesSoldsUrl}/${rptNumber}/${minSold}/${daysBack}/${minPrice}/${maxPrice}/${activeStatusOnly}/${isSellerVariation}/${itemID}/${filter}/${storeID}/${isSupplierVariation}/${priceDelta}/${excludeListed}/${excludeFreight}`;
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             const httpOptions = {
@@ -79,7 +81,7 @@ export class RenderingService {
         itemID: string | null,
         storeID: number): Observable<ModelViewTimesSold> {
         let url = `${this.getFillMatchUrl}/${rptNumber}/${minSold}/${daysBack}/${minPrice}/${maxPrice}/${activeStatusOnly}/${isSellerVariation}/${itemID}/${storeID}`;
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             const httpOptions = {

@@ -1,11 +1,11 @@
 import { UserService, TokenService } from '../_services/index';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UserProfileKeysView } from '../_models/userprofile';
 import { RouterModule } from '@angular/router';
 
-describe('UserService', () => {
-    let httpTestingController: HttpTestingController;
+fdescribe('UserService', () => {
+    let httpMock: HttpTestingController;
     let userService: UserService;
     let tokenService: TokenService;
 
@@ -16,27 +16,27 @@ describe('UserService', () => {
             ],
             providers: [UserService]
         });
-        httpTestingController = TestBed.get(HttpTestingController);
-        userService = TestBed.get(UserService);
-        tokenService = TestBed.get(TokenService);
+        httpMock = TestBed.inject(HttpTestingController);
+        userService = TestBed.inject(UserService);
+        tokenService = TestBed.inject(TokenService);
 
         interface LocalStore {
             currentUser: string;
         }
-        let localStore: LocalStore = { currentUser: "" };
+        let localStore: LocalStore = { "currentUser": "someuser" };
 
         const mockLocalStorage = {
             getItem: (key: string): string | null => {
                 if (key in localStore) {
-                    return localStore['currentUser'];
+                    // return JSON.stringify(localStore.currentUser);
+                    return localStore.currentUser;
                 }
                 else {
                     return null;
                 }
-                // return key in store ? store['currentUser'] : null;
             },
             setItem: (key: string, value: string) => {
-                localStore['currentUser'] = `${value}`;
+                localStore.currentUser = `${value}`;
             }
         };
         spyOn(localStorage, 'getItem')
@@ -45,14 +45,17 @@ describe('UserService', () => {
             .and.callFake(mockLocalStorage.setItem);
     })
     afterEach(() => {
-        httpTestingController.verify();
+        httpMock.verify();
     })
-
+    it('should be created', () => {
+        expect(userService).toBeTruthy();
+    });
     it('should pass getAPIKeys()', () => {
+        let storeId = 1;
         const mockProfile: UserProfileKeysView = {
             id: 1,
             userID: "",
-            storeID: 1,
+            storeID: storeId,
             appID: "",
             certID: "",
             devID: "",
@@ -60,17 +63,20 @@ describe('UserService', () => {
             token: ""
         }
         let profileResponse: UserProfileKeysView;
-        let user = {
-            access_token: "86399"
-        }
-        tokenService.setAccessToken(JSON.stringify(user));
-        userService.getAPIKeys(1).subscribe((response: UserProfileKeysView) => {
-            profileResponse = response;
-            expect(profileResponse).toEqual(mockProfile);
-        });
 
-        const req = httpTestingController.expectOne('http://localhost:51721/getuserprofilekeys?storeID=1');
+        // let user = {
+        //     access_token: "86399"
+        // }
+        // tokenService.setAccessToken(JSON.stringify(user));
+        
+        userService.getAPIKeys(1).subscribe(
+            (response: UserProfileKeysView) => {
+                profileResponse = response;
+                expect(profileResponse).toEqual(mockProfile);
+            });
+
+        const req = httpMock.expectOne('http://localhost:51721/getuserprofilekeys?storeID=' + storeId);
+        expect(req.request.method).toBe('GET');
         req.flush(mockProfile);
-
     })
 })

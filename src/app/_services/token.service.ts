@@ -8,8 +8,8 @@ export class TokenService {
   private TOKEN_KEY = 'currentUser';
   constructor() { }
 
-  setAccessToken(token: string) {
-    localStorage.setItem(this.TOKEN_KEY, token);
+  setAccessToken(jwt: string) {
+    localStorage.setItem(this.TOKEN_KEY, jwt);
   }
   getAccessToken(): string | null {
     return localStorage.getItem(this.TOKEN_KEY);

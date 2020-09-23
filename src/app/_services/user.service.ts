@@ -13,6 +13,7 @@ import { ChangePasswordBindingModel } from '../_models/ResetPasswordViewModel';
 import { UserProfile, TokenStatusTypeCustom, UserSettings, AppIDSelect, UserStoreView, UserSettingsView, UserProfileKeys, UserProfileView, UserProfileKeysView, eBayUser, UserToken } from '../_models/userprofile';
 import { eBayStore } from '../_models/orderhistory';
 import { Router } from '@angular/router';
+import { TokenService } from './token.service';
 
 @Injectable()
 export class UserService {
@@ -33,7 +34,8 @@ export class UserService {
     private geteBayUserUrl: string = environment.API_ENDPOINT + 'getebayuser';
 
     constructor(private router: Router,
-        private http: HttpClient) { }
+        private http: HttpClient,
+        private tokenService: TokenService) { }
 
     SendMsg() {
         let url = environment.API_ENDPOINT + "api/Account/sendmsg";
@@ -43,7 +45,7 @@ export class UserService {
     }
 
     cancelScan(rptNumber: number) {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             const httpOptions = {
@@ -68,7 +70,7 @@ export class UserService {
     ChangePassword(reset: ChangePasswordBindingModel) {
         let url = environment.API_ENDPOINT + "api/Account/changepassword";
         let body = JSON.stringify(reset);
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             const httpOptions = {
@@ -92,7 +94,7 @@ export class UserService {
     }
     UserProfileSave(profile: UserProfile) {
         let url = environment.API_ENDPOINT + "api/Account/userprofilesave";
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let body = JSON.stringify(profile);
@@ -117,7 +119,7 @@ export class UserService {
      * 
      */
     UserProfileGet(): Observable<UserProfileView> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = environment.API_ENDPOINT + "api/Account/userprofileget?userName=" + currentUser.userName;
@@ -141,7 +143,7 @@ export class UserService {
     }
 
     UserSettingsViewGet(): Observable<UserSettingsView> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = environment.API_ENDPOINT + "api/Account/usersettingsviewget?userName=" + currentUser.userName;
@@ -164,7 +166,7 @@ export class UserService {
     }
     UserSettingsViewGetByStore(storeID: number): Observable<UserSettingsView> {
 
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = environment.API_ENDPOINT + "api/Account/usersettingsviewgetbystore?userName=" + currentUser.userName
@@ -187,7 +189,7 @@ export class UserService {
             )
     }
     geteBayUser(storeID: number): Observable<eBayUser> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.geteBayUserUrl
@@ -211,7 +213,7 @@ export class UserService {
     }
     getAPIKeys(storeID: number): Observable<UserProfileKeysView> {
 
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getUserProfileKeysUrl + "?storeID=" + storeID;
@@ -233,7 +235,7 @@ export class UserService {
             )
     }
     getStore(storeID: number): Observable<eBayStore> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getStoreUrl
@@ -257,7 +259,7 @@ export class UserService {
     }
 
     GetAppIds(): Observable<AppIDSelect[]> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getappidsUrl + "?username=" + currentUser.userName;
@@ -280,7 +282,7 @@ export class UserService {
             )
     }
     getUserStores(): Observable<UserStoreView[]> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getUserStoresUrl + "?username=" + currentUser.userName;
@@ -304,7 +306,7 @@ export class UserService {
     }
 
     TradingAPIUsage(): Observable<number> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getTradingAPIUsageUrl + "?userName=" + currentUser.userName;;
@@ -329,7 +331,7 @@ export class UserService {
     }
 
     TokenStatus(storeID: number): Observable<TokenStatusTypeCustom> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.getTokenStatusTypeUrl + "?userName=" + currentUser.userName
@@ -380,7 +382,7 @@ export class UserService {
     }
 
     deleteAPIKey(appID: string) {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = `${this.deleteAPIKeyUrl}/${appID}`;
@@ -402,7 +404,7 @@ export class UserService {
             )
     }
     userSettingsSave(userSettings: UserSettings, fieldNames: string[]): Observable<UserSettingsView> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.saveUserSettingsUrl;
@@ -431,7 +433,7 @@ export class UserService {
      * @param fieldNames 
      */
     eBayKeysSave(keys: UserProfileKeys, fieldNames: string[], token: string, storeID: number): Observable<UserToken> {
-        const userJson = localStorage.getItem('currentUser');
+        const userJson = this.tokenService.getAccessToken();
         if (userJson) {
             let currentUser = JSON.parse(userJson);
             let url = this.saveeBayKeysUrl;

@@ -13,7 +13,7 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { DomSanitizer } from '@angular/platform-browser';
 import { OrderHistoryService } from '../../_services/orderhistory.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserService } from '../../_services';
+import { TokenService, UserService } from '../../_services';
 import { UserStoreView, UserSettingsView, UserProfile } from '../../_models/userprofile';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -57,7 +57,8 @@ export class GammaComponent {
     private _service: OrderHistoryService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    private _userService: UserService) {
+    private _userService: UserService,
+    private tokenService: TokenService) {
 
     this.displayProgressSpinner = true;
 
@@ -210,7 +211,7 @@ export class GammaComponent {
    * How to put in common module to share?
    */
   isAdmin(): boolean {
-    const userJson: string | null = localStorage.getItem('currentUser');
+    const userJson: string | null = this.tokenService.getAccessToken();
     if (userJson) {
       let currentUser = JSON.parse(userJson);
       if (currentUser) {

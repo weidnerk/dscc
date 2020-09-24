@@ -25,6 +25,7 @@ export class ProgressSpinnerComponent {
   private progressSpinnerOverlayConfig: AppOverlayConfig;
   private overlayRef: OverlayRef;
   constructor(private vcRef: ViewContainerRef, private overlayService: OverlayService) { }
+  
   ngOnInit() {
     // Config for Overlay Service
     this.progressSpinnerOverlayConfig = {

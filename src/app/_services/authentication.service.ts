@@ -20,13 +20,14 @@ export class AuthenticationService {
         //let headers = new Headers({ 'Content-Type': 'application/form-urlencoded' });
         //let options = new RequestOptions({ headers: headers });
         let _options = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) };
+        // let _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
         return this.http.post<any>(url, body, _options).pipe(
-            map(jwt => {
+            map(token => {
                 // login successful if there's a jwt token in the response
 
                 // token is undefined
-                if (jwt && jwt.access_token) {
+                if (token && token.access_token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     // localStorage.setItem('access_token', response.json().access_token);
                     // localStorage.setItem('expires_in', response.json().expires_in);
@@ -35,7 +36,8 @@ export class AuthenticationService {
 
                     // localStorage.setItem('currentUser', JSON.stringify({ username: username, token: response.json().access_token }));
                     // localStorage.setItem('currentUser', JSON.stringify(user));
-                    this.tokenService.setAccessToken(JSON.stringify(jwt));
+                    this.tokenService.setAccessToken(JSON.stringify(token));    // convert response (JS object?) to JSON
+                    // this.tokenService.setAccessToken(token);
                 }
             }),
             catchError(this.handleError)

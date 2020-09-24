@@ -20,29 +20,19 @@ fdescribe('UserService', () => {
         userService = TestBed.inject(UserService);
         tokenService = TestBed.inject(TokenService);
 
-        interface LocalStore {
-            currentUser: string;
-        }
-        let localStore: LocalStore = { "currentUser": "someuser" };
-
         const mockLocalStorage = {
+            // supposed to return a string of JSON
             getItem: (key: string): string | null => {
-                if (key in localStore) {
-                    // return JSON.stringify(localStore.currentUser);
-                    return localStore.currentUser;
+                if (key === "currentUser") {
+                    return JSON.stringify({ "access_token": "sometoken" });
                 }
                 else {
                     return null;
                 }
-            },
-            setItem: (key: string, value: string) => {
-                localStore.currentUser = `${value}`;
             }
         };
         spyOn(localStorage, 'getItem')
             .and.callFake(mockLocalStorage.getItem);
-        spyOn(localStorage, 'setItem')
-            .and.callFake(mockLocalStorage.setItem);
     })
     afterEach(() => {
         httpMock.verify();

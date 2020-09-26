@@ -61,7 +61,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     MatTabsModule,
     MatCardModule,
     DragDropModule,
-    AngularEditorModule
+    AngularEditorModule,
+    MatIconModule
   ]
 
 })

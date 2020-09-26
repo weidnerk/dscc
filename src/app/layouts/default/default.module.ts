@@ -36,7 +36,6 @@ import { RegisterComponent } from 'src/app/register/register.component';
 import { ChangepasswordComponent } from 'src/app/changepassword/changepassword.component';
 import { ForgotpasswordComponent } from 'src/app/forgotpassword/forgotpassword.component';
 import { PasswordresetComponent } from 'src/app/passwordreset/passwordreset.component';
-import { SellerprofileComponent } from 'src/app/sellerprofile/sellerprofile.component';
 import { ListingnoteComponent } from 'src/app/listingnote/listingnote.component';
 import { DashboardComponent } from 'src/app/dashboard/dashboard.component';
 import { ShowmessagesComponent } from 'src/app/showmessages/showmessages.component';
@@ -59,7 +58,6 @@ import { InterceptorService } from '../../_services/index';
     ChangepasswordComponent,
     ForgotpasswordComponent,
     PasswordresetComponent,
-    SellerprofileComponent,
     ListingnoteComponent,
     ShowmessagesComponent,
     ConfirmComponent,
@@ -97,7 +95,8 @@ import { InterceptorService } from '../../_services/index';
     SharedModule,
     MatDividerModule,
     MatSidenavModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ],
   providers: [
     {

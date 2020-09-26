@@ -35,6 +35,7 @@ import { PieComponent } from './widgets/pie/pie.component';
     MatMenuModule,
     MatListModule,
     RouterModule,
+    MatIconModule
   ],
   exports: [
     HeaderComponent,

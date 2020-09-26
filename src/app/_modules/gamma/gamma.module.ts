@@ -53,7 +53,8 @@ import { GammaRoutingModule } from './gamma-routes.module';
     MatTooltipModule,
     MatDialogModule,
     MatTabsModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    MatIconModule
   ]
 })
 export class GammaModule { }

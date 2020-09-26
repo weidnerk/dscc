@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
+  // API_ENDPOINT: 'http://localhost:52377/',
   API_ENDPOINT: 'http://localhost:51721/',
   REFRESH_SECONDS: '4',
   DAYSBACK_DEFAULT: 30,

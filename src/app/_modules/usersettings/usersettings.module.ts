@@ -33,7 +33,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     ProgressSpinnerModule,
     UsersettingsRoutingModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule
   ]
 })
 export class UsersettingsModule { }

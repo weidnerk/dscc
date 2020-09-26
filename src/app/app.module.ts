@@ -14,6 +14,7 @@ import { ParamService } from './_services/param.service';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { DefaultModule } from './layouts/default/default.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { DefaultModule } from './layouts/default/default.module';
   ],
   imports: [
     BrowserModule,
+    MatIconModule,
     AppRoutingModule,
     HttpClientModule, // for side-bar
     MatToolbarModule,

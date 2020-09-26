@@ -32,7 +32,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     AppOverlayModule,
     ProgressSpinnerModule,
     APIKeysRoutingModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ]
 })
 export class ApikeysModule { }

@@ -69,12 +69,6 @@ export class GammaComponent {
   }
 
   ngOnInit() {
-    let arr = new Array<number>();
-    arr[0] = 0;
-    arr[1] = 1;
-    arr[2] = 2;
-    arr.push(3);
-    //console.log(arr[3]);
 
     fromEvent(this.filter.nativeElement, 'keyup').pipe(
       debounceTime(150),

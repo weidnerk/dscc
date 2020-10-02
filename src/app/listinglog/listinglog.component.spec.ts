@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { OrderHistoryService } from '../_services/orderhistory.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-xdescribe('ListinglogComponent', () => {
+describe('ListinglogComponent', () => {
   let component: ListinglogComponent;
   let fixture: ComponentFixture<ListinglogComponent>;
 
@@ -22,6 +22,7 @@ xdescribe('ListinglogComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ListinglogComponent);
     component = fixture.componentInstance;
+    // component.listingID = 1;
     fixture.detectChanges();
   });
 

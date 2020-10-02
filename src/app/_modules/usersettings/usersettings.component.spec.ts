@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('UsersettingsComponent', () => {
   let component: UsersettingsComponent;
@@ -29,7 +30,7 @@ describe('UsersettingsComponent', () => {
         BrowserAnimationsModule,
         RouterModule.forRoot([])],
       providers: [OrderHistoryService,
-        UserService]
+        UserService, {provide: APP_BASE_HREF, useValue: '/'}]
     })
       .compileComponents();
   }));

@@ -7,6 +7,11 @@ import { UserService } from '../_services';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 
+// I had added this to try to get passed error when clicking Debug on the Karma menu
+// but doesn't work
+import { RouterTestingModule } from '@angular/router/testing';  
+import { APP_BASE_HREF } from '@angular/common';
+
 describe('ChangepasswordComponent', () => {
   let component: ChangepasswordComponent;
   let fixture: ComponentFixture<ChangepasswordComponent>;
@@ -15,11 +20,12 @@ describe('ChangepasswordComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ChangepasswordComponent],
       imports: [HttpClientTestingModule,
+        RouterTestingModule,
         FormsModule,
         ReactiveFormsModule,
         MatDialogModule,
         RouterModule.forRoot([])],
-      providers: [UserService]
+      providers: [UserService, {provide: APP_BASE_HREF, useValue: '/'}]
     })
       .compileComponents();
   }));

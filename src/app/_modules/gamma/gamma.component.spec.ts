@@ -25,7 +25,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('GammaComponent', () => {
+xdescribe('GammaComponent', () => {
   let component: GammaComponent;
   let fixture: ComponentFixture<GammaComponent>;
 
@@ -70,7 +70,7 @@ describe('GammaComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

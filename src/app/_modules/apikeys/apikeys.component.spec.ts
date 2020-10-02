@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('ApikeysComponent', () => {
   let component: ApikeysComponent;
@@ -36,7 +37,7 @@ describe('ApikeysComponent', () => {
         MatSelectModule,
         MatCheckboxModule,
         RouterModule.forRoot([])],
-        providers: [UserService]
+        providers: [UserService, {provide: APP_BASE_HREF, useValue: '/'}]
     })
     .compileComponents();
   }));

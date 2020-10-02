@@ -3,12 +3,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ListingnoteComponent } from './listingnote.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { OrderHistory } from '../_models/orderhistory';
 import { OrderHistoryService } from '../_services/orderhistory.service';
 import { RouterModule } from '@angular/router';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Listing } from '../_models/orderhistory';
 
-xdescribe('ListingnoteComponent', () => {
+describe('ListingnoteComponent', () => {
   let component: ListingnoteComponent;
   let fixture: ComponentFixture<ListingnoteComponent>;
 
@@ -32,10 +32,14 @@ xdescribe('ListingnoteComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ListingnoteComponent);
     component = fixture.componentInstance;
+    const stubListing = new Listing();
+    stubListing.ItemID = "000";
+    stubListing.StoreID = 4;
+    component.listing = stubListing; 
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeDefined();
+    expect(component).toBeTruthy();
   });
 });

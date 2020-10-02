@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AuthenticationService } from '../_services';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -16,7 +17,7 @@ describe('LoginComponent', () => {
       imports: [FormsModule,
         HttpClientTestingModule,
         RouterModule.forRoot([])],
-      providers: [AuthenticationService]
+      providers: [AuthenticationService, {provide: APP_BASE_HREF, useValue: '/'}]
     })
     .compileComponents();
   }));

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { UserService } from '../_services';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -17,7 +18,7 @@ describe('RegisterComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         RouterModule.forRoot([])],
-      providers: [UserService]
+      providers: [UserService, {provide: APP_BASE_HREF, useValue: '/'}]
     })
     .compileComponents();
   }));

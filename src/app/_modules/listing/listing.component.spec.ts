@@ -24,12 +24,12 @@ import { AppOverlayModule } from '../../overlay/overlay.module';
 import { ProgressSpinnerModule } from '../../progress-spinner/progress-spinner.module';
 import { RouterModule } from '@angular/router';
 import { OrderHistoryService } from '../../_services/orderhistory.service';
-import { HttpClientModule } from '@angular/common/http';
 import { ParamService } from '../../_services/param.service';
 import { ListCheckService } from '../../_services/listingcheck.service';
 import { MatCardModule } from '@angular/material/card';
 import { UserService } from 'src/app/_services';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('ListingComponent', () => {
   let service: UserService;
@@ -72,7 +72,8 @@ describe('ListingComponent', () => {
         OrderHistoryService,
         ParamService,
         ListCheckService,
-        UserService]
+        UserService, 
+        {provide: APP_BASE_HREF, useValue: '/'}]
     })
     /* 
     not needed yet
@@ -84,7 +85,7 @@ describe('ListingComponent', () => {
   });
 
   it('should be defined', () => {
-    expect(component).toBeDefined();
+    expect(component).toBeTruthy();
   })
   it('should be valid when not empty', () => {
 

@@ -1,3 +1,6 @@
+/**
+ * Toggle visibility of password on logon form.
+ */
 import {Component, Input, ViewEncapsulation} from '@angular/core';
 
 type Type = 'text' | 'password' ;

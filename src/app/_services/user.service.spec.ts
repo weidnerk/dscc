@@ -3,6 +3,7 @@ import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UserProfileKeysView } from '../_models/userprofile';
 import { RouterModule } from '@angular/router';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('UserService', () => {
     let httpMock: HttpTestingController;
@@ -14,7 +15,7 @@ describe('UserService', () => {
             imports: [HttpClientTestingModule,
                 RouterModule.forRoot([])
             ],
-            providers: [UserService]
+            providers: [UserService, {provide: APP_BASE_HREF, useValue: '/'}]
         });
         httpMock = TestBed.inject(HttpTestingController);
         userService = TestBed.inject(UserService);
@@ -53,11 +54,6 @@ describe('UserService', () => {
             token: ""
         }
         let profileResponse: UserProfileKeysView;
-
-        // let user = {
-        //     access_token: "86399"
-        // }
-        // tokenService.setAccessToken(JSON.stringify(user));
         
         userService.getAPIKeys(1).subscribe(
             (response: UserProfileKeysView) => {

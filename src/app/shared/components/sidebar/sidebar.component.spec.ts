@@ -1,3 +1,4 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
@@ -17,7 +18,8 @@ describe('SidebarComponent', () => {
       HttpClientTestingModule],
       providers: [
         OrderHistoryService,
-        UserService]
+        UserService,
+        {provide: APP_BASE_HREF, useValue: '/'}]
     })
     .compileComponents();
   }));

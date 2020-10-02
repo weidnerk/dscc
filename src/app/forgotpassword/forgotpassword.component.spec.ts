@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../_services';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('ForgotpasswordComponent', () => {
   let component: ForgotpasswordComponent;
@@ -19,7 +20,7 @@ describe('ForgotpasswordComponent', () => {
           ReactiveFormsModule,
           RouterModule.forRoot([])],
       providers: [
-        UserService
+        UserService, {provide: APP_BASE_HREF, useValue: '/'}
       ]
     })
       .compileComponents();

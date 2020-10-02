@@ -43,13 +43,11 @@ export class ListinglogComponent {
   color: ThemePalette = 'primary';
   mode: "determinate" | "indeterminate" | undefined = 'indeterminate';
   value: number = 50;
-  displayProgressSpinner = false;
+  displayProgressSpinner = true;
 
-  constructor(private route: Router,
-    public _service: OrderHistoryService,
+  constructor(public _service: OrderHistoryService,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer,
-    private activeroute: ActivatedRoute) {
+    private domSanitizer: DomSanitizer) {
 
     this.displayProgressSpinner = true;
     this.generateHeaders();
@@ -69,7 +67,7 @@ export class ListinglogComponent {
    * but doesn't matter - it was using a stored proc instead of a view which gave me perf boost.
    */
   ngAfterViewInit() {
-    this.displayProgressSpinner = true;
+    // this.displayProgressSpinner = true;
   }
   loadData() {
     this._service.getListingLog(this.listingID)

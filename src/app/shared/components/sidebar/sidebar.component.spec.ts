@@ -13,15 +13,15 @@ describe('SidebarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SidebarComponent ],
+      declarations: [SidebarComponent],
       imports: [RouterModule.forRoot([]),
-      HttpClientTestingModule],
+        HttpClientTestingModule],
       providers: [
         OrderHistoryService,
         UserService,
-        {provide: APP_BASE_HREF, useValue: '/'}]
+        { provide: APP_BASE_HREF, useValue: '/' }]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -32,5 +32,23 @@ describe('SidebarComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  xit('should pass getUserProfile', () => {
+    const mockLocalStorage = {
+      // supposed to return a string of JSON
+      getItem: (key: string): string | null => {
+        if (key === "currentUser") {
+          return JSON.stringify({ "access_token": "sometoken" });
+        }
+        else {
+          return null;
+        }
+      }
+    };
+    spyOn(localStorage, 'getItem')
+      .and.callFake(mockLocalStorage.getItem);
+
+    component.getUserProfile();
   });
 });

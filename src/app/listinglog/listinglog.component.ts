@@ -60,15 +60,7 @@ export class ListinglogComponent {
   ngOnInit() {
     this.loadData();
   }
-  /**
-   * I refactored using this:
-   * https://stackoverflow.com/questions/50283659/angular-6-mattable-performance-in-1000-rows
-   * 
-   * but doesn't matter - it was using a stored proc instead of a view which gave me perf boost.
-   */
-  ngAfterViewInit() {
-    // this.displayProgressSpinner = true;
-  }
+ 
   loadData() {
     this._service.getListingLog(this.listingID)
       .subscribe(res => {

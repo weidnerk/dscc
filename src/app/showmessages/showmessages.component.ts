@@ -6,18 +6,15 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   templateUrl: './showmessages.component.html',
   styleUrls: ['./showmessages.component.scss']
 })
-export class ShowmessagesComponent implements OnInit {
+export class ShowmessagesComponent {
 
   message: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<ShowmessagesComponent>) {
+    public dialogRef: MatDialogRef<ShowmessagesComponent>) {
     this.message = data.message;
   }
-
-  ngOnInit(): void {
-    
-  }
+  
   onCancel() {
     this.dialogRef.close();
   }

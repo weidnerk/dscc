@@ -20,7 +20,6 @@ export class ForgotpasswordComponent implements OnInit {
   }
 
   buildForm(): void {
-
     this.forgotPasswordForm = this.fb.group({
       emailAddress: [null, [Validators.required, Validators.email]]
     })
@@ -33,7 +32,6 @@ export class ForgotpasswordComponent implements OnInit {
   }
 
   ResetPassword(email:string) {
-
     this._userService.SetRandomPassword(email)
       .subscribe(x => {
         this.route.navigate(['/passwordreset']);

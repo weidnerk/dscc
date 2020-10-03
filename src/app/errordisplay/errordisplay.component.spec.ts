@@ -7,12 +7,17 @@ describe('ErrordisplayComponent', () => {
   let component: ErrordisplayComponent;
   let fixture: ComponentFixture<ErrordisplayComponent>;
 
+  // mock object with close method
+  const dialogMock = {
+    close: () => { }
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ErrordisplayComponent ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        { provide: MatDialogRef, useValue: {} }
+        { provide: MatDialogRef, useValue: dialogMock }
       ]
     })
     .compileComponents();
@@ -26,5 +31,11 @@ describe('ErrordisplayComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('dialog should be closed after onClose()', () => {
+    let spy = spyOn(component.dialogRef, 'close').and.callThrough();
+    component.onClose();
+    expect(spy).toHaveBeenCalled(); 
   });
 });

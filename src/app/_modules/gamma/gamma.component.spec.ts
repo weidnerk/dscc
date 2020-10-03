@@ -25,7 +25,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-xdescribe('GammaComponent', () => {
+describe('GammaComponent', () => {
   let component: GammaComponent;
   let fixture: ComponentFixture<GammaComponent>;
 
@@ -61,7 +61,22 @@ xdescribe('GammaComponent', () => {
       providers: [OrderHistoryService,
         UserService]
     })
-      .compileComponents();
+    .compileComponents();
+
+    const mockLocalStorage = {
+      // supposed to return a string of JSON
+      getItem: (key: string): string | null => {
+        if (key === "currentUser") {
+          return JSON.stringify({ "access_token": "sometoken" });
+        }
+        else {
+          return null;
+        }
+      }
+    };
+    spyOn(localStorage, 'getItem')
+      .and.callFake(mockLocalStorage.getItem);
+
   }));
 
   beforeEach(() => {
